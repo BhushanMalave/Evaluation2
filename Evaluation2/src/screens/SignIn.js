@@ -17,7 +17,8 @@ import * as yup from 'yup';
 import Buttons from '../assets/components/Button/Buttons';
 
 
-const SignIn = () => {
+
+const SignIn = ({navigation}) => {
   // const loginValidationSchema = yup.object().shape({
   //   mobileno: yup
   //     .string()
@@ -32,7 +33,7 @@ const SignIn = () => {
   // });
 
   const onClickHandler = () => {
-    console.log("111");
+    navigation.navigate('AppScreen')
  }
   return (
     <SafeAreaView style={styles.container}>

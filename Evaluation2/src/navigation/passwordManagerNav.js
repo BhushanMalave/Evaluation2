@@ -15,7 +15,7 @@ const theme = {
 
 const PasswordManagerNav = () => {
   return (
-    <NavigationContainer theme={theme} >
+ 
       <Tab.Navigator 
       screenOptions= {{
         tabBarStyle:{backgroundColor:'#1baaff'},
@@ -27,7 +27,7 @@ const PasswordManagerNav = () => {
         <Tab.Screen name="SIGN UP" component={SignUp} />
       
       </Tab.Navigator>
-    </NavigationContainer>
+   
   );
 };
 
