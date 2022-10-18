@@ -13,7 +13,7 @@ import {
   Image,
 } from 'react-native';
 
-export const AddSites = ({navigation}) => {
+export const AddSite = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.topbar}>

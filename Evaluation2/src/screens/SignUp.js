@@ -14,46 +14,111 @@ import {
 import {Formik, Field} from 'formik';
 import * as yup from 'yup';
 import {Buttons} from '../assets/components/Button/Buttons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export const SignUp = () => {
-
-  const onClickHandler = () => {
-     console.log("111");
-  }
+export const SignUp = ({navigation}) => {
   
+  const signupValidationSchema = yup.object().shape({
+    mobileno: yup
+      .string()
+      .matches(/(\d){10}\b/, 'Enter a valid mobile number')
+      .required('Mobile number is required'),
+    mpin: yup
+      .string()
+      .matches(/(\d){4}\b/, 'mPin must have a number')
+      .max(4, ({max}) => `mPin must be${max} of characters`)
+      .required('mPin is required'),
+    conformmpin: yup
+      .string()
+      .oneOf([yup.ref('mpin')], 'mPin do not match')
+      .required('Confirm mPin is required'),
+  });
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.form}>
-        <TextInput
-          name="mobileno"
-          placeholder="   Enter Mobile Number"
-          keyboardType="numeric"
-          placeholderTextColor="grey"
-          style={styles.field}
-        />
-        <TextInput
-          // component={CustomInput}
-          name="password"
-          placeholder="   Enter 4 digit Mpin"
-          placeholderTextColor="grey"
-          secureTextEntry
-          keyboardType="numeric"
-          style={styles.field}
-        />
-        <TextInput
-          // component={CustomInput}
-          name="confirmPassword"
-          placeholder="   Re-Enter 4 digit Mpin"
-          placeholderTextColor="grey"
-          secureTextEntry
-          keyboardType="numeric"
-          style={styles.field}
-        />
+        <Formik
+          validationSchema={signupValidationSchema}
+          initialValues={{mobileno: '', mpin: '', conformmpin: ''}}
+          onSubmit={async (values) => {
+            console.log(values);
+            try{
+             
+                   const jsonValue =JSON.stringify(values)
+                   await AsyncStorage.setItem('values.mobileno',jsonValue);
+                   console.log('success');
+                   navigation.navigate('SIGN IN');
+            }catch(err){
+                     console.log(err)
+            }
+          }}>
+          {({
+            handleChange,
+            handleBlur,
+            handleSubmit,
+            values,
+            errors,
+            isValid,
+          }) => (
+            <>
+              <TextInput
+                name="mobileno"
+                placeholder="   Enter Mobile Number"
+                keyboardType="numeric"
+                placeholderTextColor="grey"
+                onChangeText={handleChange('mobileno')}
+                onBlur={handleBlur('mobileno')}
+                value={values.mobileno}
+                style={styles.field}
+              />
+               {errors.mobileno && (
+                <Text style={{fontSize: 10, color: 'red'}}>
+                  {errors.mobileno}
+                </Text>
+              )}
+              <TextInput
+               
+                name="mpin"
+                placeholder="   Enter 4 digit Mpin"
+                onChangeText={handleChange('mpin')}
+                placeholderTextColor={'grey'}
+                onBlur={handleBlur('mpin')}
+                value={values.mpin}
+                secureTextEntry
+                keyboardType="numeric"
+                style={styles.field}
+              />
+              {errors.mpin && (
+                <Text style={{fontSize: 10, color: 'red'}}>{errors.mpin}</Text>
+              )}
+              <TextInput
+               
+                name="confirmmpin"
+                placeholder="   Re-Enter 4 digit Mpin"
+                onChangeText={handleChange('conformmpin')}
+                placeholderTextColor={'grey'}
+                onBlur={handleBlur('conformmpin')}
+                value={values.conformmpin}
+                secureTextEntry
+                keyboardType="numeric"
+                style={styles.field}
+              />
+              {errors.conformmpin && (
+                <Text style={{fontSize: 10, color: 'red'}}>{errors.conformmpin}</Text>
+              )}
 
-               <View style={styles.button}>
-              <Buttons  name='SIGN UP' onPress={()=>{onClickHandler()}}/>
+              <View style={styles.button}>
+                <Buttons
+                  name="SIGN UP"
+                  onPress={
+                    handleSubmit
+                  }
+                  disabled={!isValid}
+                />
               </View>
+            </>
+          )}
+        </Formik>
       </View>
     </SafeAreaView>
   );

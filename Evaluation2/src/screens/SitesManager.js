@@ -11,6 +11,7 @@ import {
   Pressable,
   TextInput,
   Image,
+  TouchableOpacity,
 } from 'react-native';
 import { MainComp } from '../assets/components/MainComponent/MainComp';
 import { Button2 } from '../assets/components/Button/Buttons';
@@ -61,7 +62,13 @@ export const SitesManager = ({navigation}) => {
         <MainComp></MainComp>
         <MainComp></MainComp>
       </View>
-      <Button2 onPress={()=>navigation.navigate('Add Site')}/>
+      {/* <Button2 onPress={()=>navigation.navigate('Add Site')}/> */}
+      <Pressable style={styles.touchableOpacity} onPress={()=> {navigation.navigate('Add Site')}}>
+      <Image
+        source={require('../assets/images/add_btn.png')}
+        style={styles.floatingButton}
+      />
+    </Pressable>
       </View>
     </SafeAreaView>
   );
@@ -150,4 +157,20 @@ oval:{
   borderRadius:20,
   marginLeft:8,
 },
+touchableOpacity:{
+  position:'absolute',
+  width:50,
+  height:50,
+  alignItems:'center',
+  justifyContent:'center',
+  right:20,
+  bottom:21,
+},
+
+floatingButton:{
+  resizeMode:'contain',
+  width:48,
+  height:48
+
+}
 });
