@@ -50,8 +50,8 @@ const styles = StyleSheet.create({
     height:50,
     alignItems:'center',
     justifyContent:'center',
-    right:20,
-    bottom:21,
+    right:5,
+    bottom:0,
   },
 
   floatingButton:{

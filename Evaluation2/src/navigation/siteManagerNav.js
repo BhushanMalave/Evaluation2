@@ -4,7 +4,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {EditSites} from '../screens/EditSite';
 import {SitesManager} from '../screens/SitesManager';
 import {DetailsSite} from '../screens/DetailsSite';
-import {AddSite} from '../screens/AddSite';
+import AddSite from '../screens/AddSite';
 
 const Stack = createNativeStackNavigator();
 

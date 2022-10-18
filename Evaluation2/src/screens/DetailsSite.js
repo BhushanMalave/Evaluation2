@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import {useRoute} from '@react-navigation/native';
 
 import {
   SafeAreaView,
@@ -14,6 +15,10 @@ import {
 } from 'react-native';
 
 export const DetailsSite = ({navigation}) => {
+
+  const route = useRoute();
+const [siteDetails,setSiteDetails] = useState(route.params.item);
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.topbar}>
@@ -22,7 +27,7 @@ export const DetailsSite = ({navigation}) => {
         {/* <Image source={require('../assets/images/bounds.png')}/> */}
         </Pressable>
          <Text style={styles.text2}> Site Details</Text>
-         <Pressable  onPress={()=>{navigation.navigate('Edit Site')}} >
+         <Pressable  onPress={()=>{navigation.navigate('Edit Site',siteDetails)}} >
           <Text style={styles.text3}>
             Edit
           </Text>
@@ -30,20 +35,32 @@ export const DetailsSite = ({navigation}) => {
       </View>
       <View style={styles.body}>
         <Text style={styles.text}>URL</Text>
-        <TextInput style={styles.textInput} />
+        <TextInput
+        value={siteDetails.url}
+        style={styles.textInput} 
+        />
         <Text style={styles.text}>Site Name</Text>
-        <TextInput style={styles.textInput} />
+        <TextInput 
+        value={siteDetails.siteName}
+        style={styles.textInput} />
         <Text style={styles.text}>Sector/Folder</Text>
-        <TextInput style={styles.textInput} />
+        <TextInput 
+        value={siteDetails.folder}
+        style={styles.textInput} />
         <Text style={styles.text}>User Name</Text>
-        <TextInput style={styles.textInput} />
+        <TextInput
+         value={siteDetails.userName}
+        style={styles.textInput} />
         <Text style={styles.text}>Site Password</Text>
-        <TextInput style={styles.textInput} />
-        <Text 
+        <TextInput 
+        value={siteDetails.sitePassword}
+        style={styles.textInput} />
+        <Text style={styles.text}>Notes</Text>
+        <TextInput 
          multiline
          numberOfLines={4}
-        style={styles.text}>Notes</Text>
-        <TextInput style={styles.textNotes} />
+        value={siteDetails.notes}
+        style={styles.textNotes} />
       </View>
     </SafeAreaView>
   );

@@ -41,7 +41,7 @@ export const EditSites = ({navigation}) => {
         style={styles.textNotes} />
       </View>
       <View style={styles.buttonbody}>
-        <Pressable onPress={() => {}} style={styles.button}>
+        <Pressable onPress={() => navigation.navigate('Add Site')} style={styles.button}>
           <Text style={styles.buttontext}>Update</Text>
         </Pressable>
       </View>
@@ -110,6 +110,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#0E85FF',
     alignItems: 'center',
     justifyContent: 'center',
+
   },
   buttontext: {
     height: 28,

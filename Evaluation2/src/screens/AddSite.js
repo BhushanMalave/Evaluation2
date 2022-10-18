@@ -2,18 +2,14 @@ import React from 'react';
 
 import {
   SafeAreaView,
-  ScrollView,
-  StatusBar,
   StyleSheet,
   Text,
-  useColorScheme,
   View,
   Pressable,
   TextInput,
-  Image,
 } from 'react-native';
 
-export const AddSite = ({navigation}) => {
+const AddSite = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.topbar}>
@@ -129,3 +125,5 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
 });
+
+export default AddSite;

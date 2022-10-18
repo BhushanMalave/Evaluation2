@@ -12,50 +12,60 @@ import {
   Image,
 } from 'react-native';
 
-export const MainComp = () => {
+export const MainComp =  ({
+  title = 'Facebook',
+  url = 'www.facebook.com',
+  uri,
+  // copyPasswordText,
+  // handelListPress,
+  onPress,
+}) =>{
   return (
     <View style={styles.body}>
+    <Pressable onPress={onPress}>
       <View style={styles.bodytop}>
         <Image
-          source={require('../../images/Bitmap.png')}
+          source={uri ? uri : imgUrl}
           style={styles.logo}
         />
         <View style={styles.bodyin}>
-          <Text style={styles.text1}>Facebook</Text>
+          <Text style={styles.text1}>{title}</Text>
           <Text style={styles.text2}>Copy Password</Text>
         </View>
       </View>
-
+      <View style={styles.view}>
       <Pressable>
-        <Text style={styles.text3}>www.facbook.com</Text>
+        <Text style={styles.text3}>{url}</Text>
+      </Pressable>
+      </View>
       </Pressable>
     </View>
+   
   );
 };
 
 const styles = StyleSheet.create({
   body: {
-    height: 103,
+    height: 120,
     width: 345,
     borderRadius: 12.6,
     marginTop: 20,
-    borderRight: 5,
+    // borderRight: 5,
     backgroundColor: '#FFFFFF',
-    shadowOpacity:0.1,
+    shadowOpacity:0.3,
+    paddingEnd:15,
   },
   bodytop: {
-    height: 65,
-    width: 320,
     flexDirection: 'row',
-    marginHorizontal: 15,
+    justifyContent:'space-between',
   },
   logo: {
-    height: 45,
-    weight: 45,
-    marginTop: 8,
+    marginTop: 10,
+    marginLeft:5,
   },
   bodyin: {
-    marginLeft: 165,
+    marginVertical:10,
+
   },
   text1: {
     height: 24,
@@ -65,6 +75,10 @@ const styles = StyleSheet.create({
     lineheight: 24,
     marginTop: 8,
   },
+  view:{
+    backgroundColor: '#FAFAFA',
+    width: 345,
+  },
   text2: {
     height: 15,
     weight: 81,
@@ -73,14 +87,11 @@ const styles = StyleSheet.create({
     marginTop: 8,
   },
   text3: {
-    height: 45,
-    weight: 132,
     fontSize: 15,
     color: '#3C4857',
     textAlign: 'center',
-    marginTop: 7,
-    marginBottom: 8,
     backgroundColor: '#FAFAFA',
-    paddingTop: 10,
+    paddingTop: 15,
+    paddingBottom:13,
   },
 });
