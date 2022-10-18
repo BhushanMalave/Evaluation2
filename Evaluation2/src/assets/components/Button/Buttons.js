@@ -1,5 +1,5 @@
 import React from 'react';
-import {Pressable, View, Text, StyleSheet} from 'react-native';
+import {Pressable, View, Text, StyleSheet,TouchableOpacity,Image,} from 'react-native';
 
 const Buttons = ({onPress, name}) => {
   return (
@@ -8,6 +8,18 @@ const Buttons = ({onPress, name}) => {
         <Text style={styles.text}>{name}</Text>
       </Pressable>
     </View>
+  );
+};
+
+
+const Button2 = ({onPress, name}) => {
+  return (
+    <TouchableOpacity style={styles.touchableOpacity} onPress={onPress}>
+      <Image
+        source={require('../../images/add_btn.png')}
+        style={styles.floatingButton}
+      />
+    </TouchableOpacity>
   );
 };
 
@@ -32,6 +44,22 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  touchableOpacity:{
+    position:'absolute',
+    width:50,
+    height:50,
+    alignItems:'center',
+    justifyContent:'center',
+    right:20,
+    bottom:21,
+  },
+
+  floatingButton:{
+    resizeMode:'contain',
+    width:48,
+    height:48
+
+  }
 });
 
-export default Buttons;
+export  {Buttons,Button2};

@@ -6,24 +6,29 @@ import { PasswordManager } from '../screens/passwordManager';
 import { SiteManagerNav } from './siteManagerNav';
 
 const Stack = createNativeStackNavigator();
+const theme = {
+  colors: {
+    background: "transparent"
+  },
+};
 
-function Router() {
+export const Router =() =>{
   return (
-    <NavigationContainer >
+    <NavigationContainer theme={theme}  >
       <Stack.Navigator>
         <Stack.Screen
-          name="AuthScreen"
-          options={{header: () => null}}
+          name="Password Manager"
+          options={{headerShown: false}}
           component={PasswordManager}
         />
         <Stack.Screen
-          name="AppScreen"
+          name="Site Manager"
+          options={{headerShown: false}}
           component={SiteManagerNav} 
-          options={{header: () => null}}
+         
         />
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
 
-export default Router;

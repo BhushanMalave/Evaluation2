@@ -25,7 +25,10 @@ export const MainComp = () => {
           <Text style={styles.text2}>Copy Password</Text>
         </View>
       </View>
-      <Text style={styles.text3}>www.facbook.com</Text>
+
+      <Pressable>
+        <Text style={styles.text3}>www.facbook.com</Text>
+      </Pressable>
     </View>
   );
 };
@@ -33,18 +36,18 @@ export const MainComp = () => {
 const styles = StyleSheet.create({
   body: {
     height: 103,
-    width: 320,
+    width: 345,
     borderRadius: 12.6,
-    marginVertical: 20,
-    marginHorizontal: 20,
-    color: 'white',
+    marginTop: 20,
     borderRight: 5,
+    backgroundColor: '#FFFFFF',
+    shadowOpacity:0.1,
   },
   bodytop: {
     height: 65,
     width: 320,
     flexDirection: 'row',
-    color: 'white',
+    marginHorizontal: 15,
   },
   logo: {
     height: 45,
@@ -52,8 +55,7 @@ const styles = StyleSheet.create({
     marginTop: 8,
   },
   bodyin: {
-     marginLeft: 180,
-    
+    marginLeft: 165,
   },
   text1: {
     height: 24,
@@ -71,12 +73,14 @@ const styles = StyleSheet.create({
     marginTop: 8,
   },
   text3: {
-    height: 19,
+    height: 45,
     weight: 132,
     fontSize: 15,
     color: '#3C4857',
-    textAlign:'center',
-    marginTop: 8,
+    textAlign: 'center',
+    marginTop: 7,
     marginBottom: 8,
+    backgroundColor: '#FAFAFA',
+    paddingTop: 10,
   },
 });

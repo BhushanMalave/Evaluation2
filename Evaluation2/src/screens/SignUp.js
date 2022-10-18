@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 import {Formik, Field} from 'formik';
 import * as yup from 'yup';
-import Buttons from '../assets/components/Button/Buttons';
+import {Buttons} from '../assets/components/Button/Buttons';
 
 export const SignUp = () => {
 

@@ -13,15 +13,20 @@ import {
   Image,
 } from 'react-native';
 
-export const EditSites = ({navigation}) => {
+export const DetailsSite = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.topbar}>
-        <Pressable  onPress={()=>{navigation.navigate('Site Details')}}>
+        <Pressable  onPress={()=>{navigation.navigate('Site')}}>
           <Text style={styles.text1} > {'<-'} </Text>
         {/* <Image source={require('../assets/images/bounds.png')}/> */}
         </Pressable>
-         <Text style={styles.text2}> Edit </Text>
+         <Text style={styles.text2}> Site Details</Text>
+         <Pressable  onPress={()=>{navigation.navigate('Edit Site')}} >
+          <Text style={styles.text3}>
+            Edit
+          </Text>
+         </Pressable>
       </View>
       <View style={styles.body}>
         <Text style={styles.text}>URL</Text>
@@ -34,16 +39,11 @@ export const EditSites = ({navigation}) => {
         <TextInput style={styles.textInput} />
         <Text style={styles.text}>Site Password</Text>
         <TextInput style={styles.textInput} />
-        <Text style={styles.text}>Notes</Text>
-        <TextInput 
+        <Text 
          multiline
          numberOfLines={4}
-        style={styles.textNotes} />
-      </View>
-      <View style={styles.buttonbody}>
-        <Pressable onPress={() => {}} style={styles.button}>
-          <Text style={styles.buttontext}>Update</Text>
-        </Pressable>
+        style={styles.text}>Notes</Text>
+        <TextInput style={styles.textNotes} />
       </View>
     </SafeAreaView>
   );
@@ -54,23 +54,31 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   topbar:{
-    backgroundColor:'#0E85FF',
-    flexDirection:'row',
-    height:60,
-    
- },
- text1:{
-   marginTop:20,
-   marginLeft:9,
- },
- text2:{
-  height:28,
-  width:103,
-  fontSize:20,
-  marginTop:20,
-  marginLeft:30,
-  color:'#FFFFFF',
-},
+     backgroundColor:'#0E85FF',
+     flexDirection:'row',
+     height:60,
+     
+  },
+  text1:{
+    marginTop:20,
+    marginLeft:9,
+  },
+  text2:{
+    height:28,
+    width:103,
+    fontSize:20,
+    marginTop:20,
+    marginLeft:30,
+    color:'#FFFFFF',
+  },
+  text3:{
+    height:28,
+    width:103,
+    fontSize:20,
+    marginTop:20,
+    marginLeft:170,
+    color:'#FFFFFF',
+  },
   body: {
     margin: 20,
   },
@@ -99,23 +107,5 @@ const styles = StyleSheet.create({
     borderColor: '#D7D7D7',
     marginTop: 10,
     marginBottom: 10,
-  },
-  buttonbody: {
-    alignItems:'baseline',
-    marginTop:10,
-  },
-  button: {
-    height: 55,
-    width:'100%',
-    backgroundColor: '#0E85FF',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  buttontext: {
-    height: 28,
-    width: 65,
-    color: '#FFFFFF',
-    fontSize: 20,
-    textAlign:'center',
   },
 });

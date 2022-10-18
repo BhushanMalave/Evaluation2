@@ -19,7 +19,7 @@ import { MainComp } from './src/assets/components/MainComponent/MainComp';
 import { SitesManager } from './src/screens/SitesManager';
 import { AddSites } from './src/screens/AddSites';
 import { EditSites } from './src/screens/EditSite';
-import Router from './src/navigation/Route';
+import { Router } from './src/navigation/Route';
 
 
 

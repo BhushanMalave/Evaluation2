@@ -13,9 +13,16 @@ import {
   Image,
 } from 'react-native';
 
-export const AddSites = () => {
+export const AddSites = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
+      <View style={styles.topbar}>
+        <Pressable  onPress={()=>{navigation.navigate('Site')}}>
+          <Text style={styles.text1} > {'<-'} </Text>
+        {/* <Image source={require('../assets/images/bounds.png')}/> */}
+        </Pressable>
+         <Text style={styles.text2}> Add Site </Text>
+      </View>
       <View style={styles.body}>
         <Text style={styles.text}>URL</Text>
         <TextInput style={styles.textInput} />
@@ -28,7 +35,10 @@ export const AddSites = () => {
         <Text style={styles.text}>Site Password</Text>
         <TextInput style={styles.textInput} />
         <Text style={styles.text}>Notes</Text>
-        <TextInput style={styles.textNotes} />
+        <TextInput
+        multiline
+        numberOfLines={4}
+        style={styles.textNotes} />
       </View>
       <View style={styles.buttonbody}>
         <Pressable onPress={() => {}} style={styles.button}>
@@ -49,6 +59,24 @@ const styles = StyleSheet.create({
   body: {
     margin: 20,
   },
+  topbar:{
+    backgroundColor:'#0E85FF',
+    flexDirection:'row',
+    height:60,
+    
+ },
+ text1:{
+   marginTop:20,
+   marginLeft:9,
+ },
+ text2:{
+  height:28,
+  width:103,
+  fontSize:20,
+  marginTop:20,
+  marginLeft:30,
+  color:'#FFFFFF',
+},
   textInput: {
     height: 41,
     weight: 321,
@@ -66,7 +94,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   textNotes: {
-    height: 61,
+    height:90,
     weight: 321,
     borderWidth: 1,
     borderRadius: 4,
@@ -77,6 +105,7 @@ const styles = StyleSheet.create({
   },
   buttonbody: {
     flexDirection: 'row',
+    alignItems:'baseline',
   },
   button1: {
     height: 55,

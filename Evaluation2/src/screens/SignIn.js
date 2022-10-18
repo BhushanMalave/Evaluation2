@@ -14,7 +14,7 @@ import {
 
 import {Formik} from 'formik';
 import * as yup from 'yup';
-import Buttons from '../assets/components/Button/Buttons';
+import {Buttons} from '../assets/components/Button/Buttons';
 
 
 
@@ -33,7 +33,7 @@ const SignIn = ({navigation}) => {
   // });
 
   const onClickHandler = () => {
-    navigation.navigate('AppScreen')
+    navigation.navigate('Site Manager')
  }
   return (
     <SafeAreaView style={styles.container}>
