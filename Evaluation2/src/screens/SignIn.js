@@ -10,6 +10,7 @@ import {
   Pressable,
   View,
   Image,
+  Alert,
 } from 'react-native';
 
 import {Formik} from 'formik';
@@ -35,28 +36,25 @@ const SignIn = ({navigation}) => {
         <Formik
           validationSchema={signinValidationSchema}
           initialValues={{mobileno: '', mpin: ''}}
-          onSubmit={async (values) => {
+          onSubmit={async values => {
             console.log(values);
-            try{
-              
-                 const jsonValue = await AsyncStorage.getItem('values.mobileno');
-                 if(jsonValue != null)
-                 {
-                  console.log('success123');
-                  parseValue=JSON.parse(jsonValue);
-                  console.log(parseValue);
-                  if(values.mobileno === parseValue.mobileno && values.mpin === parseValue.mpin)
-                  {
-                    console.log('Success');
-                    navigation.navigate('Site Manager');
-                  }
-                  else{
-                    console.log('worng')
-                  }
-                 }
-            }catch(err)
-            {
-                console.log(err);
+            try {
+              const jsonValue = await AsyncStorage.getItem(values.mobileno);
+              if (jsonValue != null) {
+                parseValue = JSON.parse(jsonValue);
+
+                if (
+                  values.mobileno === parseValue.mobileno &&
+                  values.mpin === parseValue.mpin
+                ) {
+                  alert('Successfully Logged In');
+                  navigation.navigate('Site Manager');
+                } else {
+                  Alert('Enter Correct Mobile Number and MPin');
+                }
+              }
+            } catch (err) {
+              console.log(err);
             }
           }}>
           {({
@@ -103,9 +101,7 @@ const SignIn = ({navigation}) => {
               <View style={styles.button}>
                 <Buttons
                   name="SIGN IN"
-                  onPress={
-                    handleSubmit
-                  }
+                  onPress={handleSubmit}
                   disabled={!isValid}
                 />
               </View>
@@ -115,35 +111,9 @@ const SignIn = ({navigation}) => {
                   source={require('../assets/images/fingerprinticon.png')}
                 />
               </View>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  marginTop: 15,
-                  alignContent: 'center',
-                  justifyContent: 'center',
-                }}>
-                <Text
-                  style={{
-                    fontSize: 18,
-                    fontWeight: 'bold',
-                    color: '#FFFFFF',
-                    height: 24,
-                    width: 40,
-                    fontStyle: 'OpenSans-bold',
-                  }}>
-                  OR
-                </Text>
-                <Text
-                  style={{
-                    fontSize: 13,
-                    lineHeight: 25,
-                    color: '#FFFFFF',
-                    height: 21,
-                    width: 219,
-                    fontStyle: 'EMprint-Semibold',
-                  }}>
-                  USE YOUR FINGERPRINT TO LOGIN
-                </Text>
+              <View style={styles.textbox}>
+                <Text style={styles.text1}>OR</Text>
+                <Text style={styles.text3}>USE YOUR FINGERPRINT TO LOGIN</Text>
               </View>
             </>
           )}
@@ -175,14 +145,36 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 14,
     color: 'white',
-    fontStyle: 'EMprint Semibold',
+    // fontStyle: 'EMprint Semibold',
+  },
+  textbox: {
+    flexDirection: 'row',
+    marginTop: 15,
+    alignContent: 'center',
+    justifyContent: 'center',
+  },
+  text1: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#FFFFFF',
+    height: 24,
+    width: 40,
+    // fontStyle: 'OpenSans-bold',
   },
   text2: {
     width: 27,
     hight: 24,
     color: 'white',
     fontSize: 18,
-    fontStyle: 'OpenSans-Bold',
+    // fontStyle: 'OpenSans-Bold',
+  },
+  text3: {
+    fontSize: 13,
+    lineHeight: 25,
+    color: '#FFFFFF',
+    height: 21,
+    width: 219,
+    // fontStyle: 'EMprint-Semibold',
   },
   button: {
     backgroundColor: 'white',

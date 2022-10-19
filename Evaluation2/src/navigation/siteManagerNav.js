@@ -6,6 +6,7 @@ import {SitesManager} from '../screens/SitesManager';
 import {DetailsSite} from '../screens/DetailsSite';
 import AddSite from '../screens/AddSite';
 
+
 const Stack = createNativeStackNavigator();
 
 export const SiteManagerNav = () => {

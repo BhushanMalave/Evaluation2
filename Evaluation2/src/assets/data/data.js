@@ -9,29 +9,29 @@ export const Data = [
   {
     id: '1',
     url: 'accounts.facebook.com',
-    siteName: 'www.facebook.com',
+    siteName: 'Facebook',
     folder: 'Social Media',
     userName: 'smrock',
     sitePassword: '12345678',
     notes: '',
     icon: Image_Icon[0],
-    title: 'Facebook',
+  
   },
   {
     id: '2',
     url: 'accounts.youtube.com',
-    siteName: 'www.youtube.com',
+    siteName: 'Youtube',
     folder: 'Social Media',
     userName: 'smrock',
     sitePassword: '12345678',
     notes: '',
     icon: Image_Icon[1],
-    title: 'Youtube',
+   
   },
   {
     id: '3',
     url: 'accounts.twitter.com',
-    siteName: 'www.twitter.com',
+    siteName:  'Twitter',
     folder: 'Social Media',
     userName: 'smrock',
     sitePassword: '12345678',
@@ -42,12 +42,11 @@ export const Data = [
   {
     id: '4',
     url: 'accounts.instagram.com',
-    siteName: 'www.instagram.com',
+    siteName: 'Instagram',
     folder: 'Social Media',
     userName: 'smrock',
     sitePassword: '12345678',
     notes: '',
     icon: Image_Icon[3],
-    title: 'Instagram',
   },
 ];

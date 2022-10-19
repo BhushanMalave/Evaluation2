@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 
 import {
@@ -12,35 +10,31 @@ import {
   View,
 } from 'react-native';
 
-import { PasswordManager } from './src/screens/passwordManager';
+import {PasswordManager} from './src/screens/passwordManager';
 import PasswordManagerNav from './src/navigation/passwordManagerNav';
-import { StartScreen } from './src/screens/startScreen';
-import { MainComp } from './src/assets/components/MainComponent/MainComp';
-import { SitesManager } from './src/screens/SitesManager';
-import { AddSites } from './src/screens/AddSites';
-import { EditSites } from './src/screens/EditSite';
-import { Router } from './src/navigation/Route';
+import {StartScreen} from './src/screens/startScreen';
+import {MainComp} from './src/assets/components/MainComponent/MainComp';
+import {SitesManager} from './src/screens/SitesManager';
+import AddSite from './src/screens/AddSite';
+import {EditSites} from './src/screens/EditSite';
+import {Router} from './src/navigation/Route';
+import { Store } from './src/redux/Store';
+import {Provider} from 'react-redux';
 
-
-
-
-
-
-const App =() => {
-  
-
+const App = () => {
   return (
     <SafeAreaView style={styles.container}>
-   <Router/>
+      <Provider store={Store}>
+        <Router />
+      </Provider>
     </SafeAreaView>
-      
   );
 };
 
 const styles = StyleSheet.create({
-  container:{
-    flex:1,
-  }
+  container: {
+    flex: 1,
+  },
 });
 
 export default App;

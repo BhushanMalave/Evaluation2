@@ -17,7 +17,6 @@ import {Buttons} from '../assets/components/Button/Buttons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const SignUp = ({navigation}) => {
-  
   const signupValidationSchema = yup.object().shape({
     mobileno: yup
       .string()
@@ -40,16 +39,15 @@ export const SignUp = ({navigation}) => {
         <Formik
           validationSchema={signupValidationSchema}
           initialValues={{mobileno: '', mpin: '', conformmpin: ''}}
-          onSubmit={async (values) => {
+          onSubmit={async values => {
             console.log(values);
-            try{
-             
-                   const jsonValue =JSON.stringify(values)
-                   await AsyncStorage.setItem('values.mobileno',jsonValue);
-                   console.log('success');
-                   navigation.navigate('SIGN IN');
-            }catch(err){
-                     console.log(err)
+            try {
+              const jsonValue = JSON.stringify(values);
+              await AsyncStorage.setItem(values.mobileno, jsonValue);
+              alert('Successfully Added');
+              navigation.navigate('SIGN IN');
+            } catch (err) {
+              console.log(err);
             }
           }}>
           {({
@@ -71,13 +69,12 @@ export const SignUp = ({navigation}) => {
                 value={values.mobileno}
                 style={styles.field}
               />
-               {errors.mobileno && (
+              {errors.mobileno && (
                 <Text style={{fontSize: 10, color: 'red'}}>
                   {errors.mobileno}
                 </Text>
               )}
               <TextInput
-               
                 name="mpin"
                 placeholder="   Enter 4 digit Mpin"
                 onChangeText={handleChange('mpin')}
@@ -92,7 +89,6 @@ export const SignUp = ({navigation}) => {
                 <Text style={{fontSize: 10, color: 'red'}}>{errors.mpin}</Text>
               )}
               <TextInput
-               
                 name="confirmmpin"
                 placeholder="   Re-Enter 4 digit Mpin"
                 onChangeText={handleChange('conformmpin')}
@@ -104,15 +100,15 @@ export const SignUp = ({navigation}) => {
                 style={styles.field}
               />
               {errors.conformmpin && (
-                <Text style={{fontSize: 10, color: 'red'}}>{errors.conformmpin}</Text>
+                <Text style={{fontSize: 10, color: 'red'}}>
+                  {errors.conformmpin}
+                </Text>
               )}
 
               <View style={styles.button}>
                 <Buttons
                   name="SIGN UP"
-                  onPress={
-                    handleSubmit
-                  }
+                  onPress={handleSubmit}
                   disabled={!isValid}
                 />
               </View>

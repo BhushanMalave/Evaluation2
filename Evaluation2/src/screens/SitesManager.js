@@ -17,17 +17,23 @@ import {
 import {MainComp} from '../assets/components/MainComponent/MainComp';
 import {Button2} from '../assets/components/Button/Buttons';
 import {Data} from '../assets/data/data';
+import {useSelector, useDispatch} from 'react-redux';
+import Icon from 'react-native-vector-icons/AntDesign';
+import {useState} from 'react';
+import SearchField from '../assets/components/MainComponent/SearchField';
 
 export const SitesManager = ({navigation}) => {
+  const [clicked, setClicked] = useState(true);
+  const siteData = useSelector(state => state.site.value);
   const renderItem = ({item}) => (
     <MainComp
-      title={item.title}
+      title={item.siteName}
       uri={item.icon}
       url={item.siteName}
-      onPress={() => navigation.navigate('Site Details', {item})}
-      // copyPasswordText={() => copyToClipboard(item.sitePassword)}
+      onPress={() => navigation.navigate('Site Details',{item})}
     />
   );
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.bodytop}>
@@ -52,34 +58,44 @@ export const SitesManager = ({navigation}) => {
           style={styles.image5}
         />
       </View>
-      <View style={styles.container2}>
-        <View style={styles.bodytop2}>
-          <Text style={styles.text1}>Sites</Text>
-          <Text style={styles.text2}>Social Media</Text>
-          <View style={styles.oval}>
-            <Text style={styles.number}>07</Text>
-          </View>
-          <Pressable>
-            <Image
-              source={require('../assets/images/pathcopy.png')}
-              style={styles.image6}
-            />
-          </Pressable>
-        </View>
-        <View style={styles.bottomborder} />
 
+      <View style={styles.container2}>
+        {/* {clicked ? (
+          <SearchField/>
+        ) : ( */}
+          
+          <View>
+            <View style={styles.bodytop2}>
+              <Text style={styles.text1}>Sites</Text>
+              <Text style={styles.text2}>Social Media</Text>
+
+              <View style={styles.oval}>
+                <Text style={styles.number}>{siteData.length}</Text>
+              </View>
+              <Pressable>
+                <Image
+                  source={require('../assets/images/pathcopy.png')}
+                  style={styles.image6}
+                />
+              </Pressable>
+            </View>
+            <View style={styles.bottomborder}/>
+            
+            </View> 
+        {/* )} */}
         <View>
           <FlatList
-            data={Data}
+            data={siteData}
             renderItem={renderItem}
             keyExtractor={item => item.id}
           />
         </View>
-        
-        <Button2 onPress={() => navigation.navigate('Add Site')} />
-       
+        <Button2
+          onPress={() => {
+            navigation.navigate('Add Site');
+          }}
+        />
       </View>
-      
     </SafeAreaView>
   );
 };
@@ -89,11 +105,24 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#FAFAFA',
   },
-  view: {},
+  SectionStyle: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    height: 55,
+    width: 390,
+    borderRadius: 4,
+    justifyContent: 'space-between',
+    // paddingHorizontal: 10,
+    fontWeight: 'bold',
+    padding: 10,
+    marginTop: 5,
+  },
   container2: {
     marginHorizontal: 20,
     marginVertical: 20,
-    flex:2,
+    flex: 2,
   },
   bodytop: {
     height: 55,
@@ -112,6 +141,7 @@ const styles = StyleSheet.create({
     width: 30,
     borderBottomColor: '#FFA136',
     borderRadius: 1.6,
+    marginBottom:10,
   },
   image1: {
     marginTop: 20,
@@ -154,9 +184,10 @@ const styles = StyleSheet.create({
     height: 22,
     width: 19,
     color: '#FFFFFF',
-    fontFamily: 'Open Sans',
+    // fontFamily: 'Open Sans',
     fontSize: 16,
-    marginLeft: 0,
+    marginLeft: 7,
+    marginTop: 2,
   },
   oval: {
     alignItems: 'center',
@@ -167,5 +198,4 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     marginLeft: 8,
   },
- 
 });

@@ -13,21 +13,26 @@ import {
   TextInput,
   Image,
 } from 'react-native';
+import Icon from 'react-native-vector-icons/AntDesign';
 
 export const DetailsSite = ({navigation}) => {
 
   const route = useRoute();
 const [siteDetails,setSiteDetails] = useState(route.params.item);
+const siteId = siteDetails.id;
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.topbar}>
-        <Pressable  onPress={()=>{navigation.navigate('Site')}}>
-          <Text style={styles.text1} > {'<-'} </Text>
-        {/* <Image source={require('../assets/images/bounds.png')}/> */}
-        </Pressable>
+      <Icon  name="arrowleft"
+                size={25}
+                color="white"
+                style={styles.icon}
+                onPress={() => {
+                  navigation.navigate('Site',{siteDetails});
+                }}/>
          <Text style={styles.text2}> Site Details</Text>
-         <Pressable  onPress={()=>{navigation.navigate('Edit Site',siteDetails)}} >
+         <Pressable  onPress={()=>{navigation.navigate('Edit Site',{siteDetails})}} >
           <Text style={styles.text3}>
             Edit
           </Text>
@@ -124,5 +129,9 @@ const styles = StyleSheet.create({
     borderColor: '#D7D7D7',
     marginTop: 10,
     marginBottom: 10,
+  },
+  icon:{
+    marginTop:20,
+    marginLeft:5,
   },
 });
