@@ -49,9 +49,10 @@ const SignIn = ({navigation}) => {
                   alert('Successfully Logged In');
 
                   navigation.navigate('Site Manager');
-                } else {
-                  Alert('Enter Correct Mobile Number and MPin');
-                }
+                } 
+              }
+              else {
+                alert('Enter Correct Mobile Number and MPin');
               }
             } catch (err) {
               console.log(err);
