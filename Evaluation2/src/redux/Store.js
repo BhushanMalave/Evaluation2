@@ -24,9 +24,3 @@ export default configureStore({
       serializableCheck: false,
     }),
 });
-
-// export const Store = configureStore({
-//   reducer: {
-//     site: persistRed,
-//   },
-// });

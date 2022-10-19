@@ -59,6 +59,7 @@ export const EditSites = ({navigation}) => {
           };
           dispatch(editSite(obj));
           navigation.navigate('Site');
+          alert('Updated Successfully')
         }}>
         {({
           handleChange,
