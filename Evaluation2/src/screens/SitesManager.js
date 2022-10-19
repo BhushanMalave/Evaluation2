@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
   },
   container2: {
     marginHorizontal: 20,
-    marginVertical: 20,
+    marginVertical: 10,
     flex: 2,
   },
   bodytop: {
