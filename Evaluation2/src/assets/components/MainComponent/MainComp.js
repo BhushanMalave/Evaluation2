@@ -16,8 +16,6 @@ export const MainComp =  ({
   title = 'Facebook',
   url = 'www.facebook.com',
   uri,
-  // copyPasswordText,
-  // handelListPress,
   onPress,
 }) =>{
   return (
@@ -49,10 +47,10 @@ const styles = StyleSheet.create({
     height: 120,
     width: 345,
     borderRadius: 12.6,
-    marginTop: 20,
-    // borderRight: 5,
+    marginTop: 10,
+     borderRight: 5,
     backgroundColor: '#FFFFFF',
-    shadowOpacity:0.3,
+    shadowOpacity:0.5,
     paddingEnd:15,
   },
   bodytop: {

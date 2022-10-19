@@ -37,17 +37,20 @@ const SignIn = ({navigation}) => {
           validationSchema={signinValidationSchema}
           initialValues={{mobileno: '', mpin: ''}}
           onSubmit={async values => {
-            console.log(values);
+            console.log(" json value",values);
             try {
               const jsonValue = await AsyncStorage.getItem(values.mobileno);
+              console.log(jsonValue);
               if (jsonValue != null) {
                 parseValue = JSON.parse(jsonValue);
+                console.log("parsevalue",parseValue)
 
                 if (
                   values.mobileno === parseValue.mobileno &&
                   values.mpin === parseValue.mpin
                 ) {
-                  alert('Successfully Logged In');
+                  // alert('Successfully Logged In');
+                  console.log('navigation')
                   navigation.navigate('Site Manager');
                 } else {
                   Alert('Enter Correct Mobile Number and MPin');

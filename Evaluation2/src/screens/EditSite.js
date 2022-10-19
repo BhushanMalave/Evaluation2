@@ -41,12 +41,12 @@ export const EditSites = ({navigation}) => {
       <Formik
         validationSchema={editSiteValidationSchema}
         initialValues={{
-          url: ' ',
-          siteName: ' ',
-          folder: '',
-          userName: '',
-          sitePassword: '',
-          notes: ' ',
+          url: siteDetails.url,
+          siteName: siteDetails.siteName,
+          folder: siteDetails.folder,
+          userName: siteDetails.userName,
+          sitePassword: siteDetails.sitePassword,
+          notes: siteDetails.notes,
         }}
         onSubmit={async values => {
           console.log(values);

@@ -10,35 +10,35 @@ import {
 } from 'react-native';
 import {Formik, Field} from 'formik';
 import * as yup from 'yup';
-import { addSite } from '../redux/Slice';
-import { useSelector, useDispatch } from 'react-redux'
+import {addSite} from '../redux/Slice';
+import {useSelector, useDispatch} from 'react-redux';
 import Facebook from '../assets/images/Bitmap.png';
 import uuid from 'react-native-uuid';
 import Icon from 'react-native-vector-icons/AntDesign';
 
 const AddSite = ({navigation}) => {
-
   const editSiteValidationSchema = yup.object().shape({});
-  const siteData = useSelector((state) => state.site.value)
+  const siteData = useSelector(state => state.site.value);
   const dispatch = useDispatch();
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.topbar}>
-       
-          <Icon  name="arrowleft"
-                size={25}
-                color="white"
-                style={styles.icon}
-                onPress={() => {
-                  navigation.navigate('Site');
-                }}/>
-      
+        <Icon
+          name="arrowleft"
+          size={25}
+          color="white"
+          style={styles.icon}
+          onPress={() => {
+            navigation.navigate('Site');
+          }}
+        />
+
         <Text style={styles.text2}> Add Site </Text>
       </View>
       <Formik
         validationSchema={editSiteValidationSchema}
         initialValues={{
-          id: siteData.length+1,
+          id: siteData.length + 1,
           url: ' ',
           siteName: ' ',
           folder: '',
@@ -47,15 +47,10 @@ const AddSite = ({navigation}) => {
           notes: '',
           icon: Facebook,
         }}
-        onSubmit={ values => {
+        onSubmit={values => {
           console.log(values);
-          
           dispatch(addSite(values));
-          navigation.navigate("Site");
-
-          
-
-
+          navigation.navigate('Site');
         }}>
         {({
           handleChange,
@@ -211,9 +206,9 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontSize: 20,
   },
-  icon:{
-    marginTop:20,
-    marginLeft:5,
+  icon: {
+    marginTop: 20,
+    marginLeft: 5,
   },
 });
 

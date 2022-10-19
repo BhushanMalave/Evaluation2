@@ -23,14 +23,14 @@ import {useState} from 'react';
 import SearchField from '../assets/components/MainComponent/SearchField';
 
 export const SitesManager = ({navigation}) => {
-  const [clicked, setClicked] = useState(true);
+  const [clicked, setClicked] = useState(false);
   const siteData = useSelector(state => state.site.value);
   const renderItem = ({item}) => (
     <MainComp
       title={item.siteName}
       uri={item.icon}
-      url={item.siteName}
-      onPress={() => navigation.navigate('Site Details',{item})}
+      url={item.url}
+      onPress={() => navigation.navigate('Site Details', {item})}
     />
   );
 
@@ -45,10 +45,12 @@ export const SitesManager = ({navigation}) => {
           source={require('../assets/images/pass.png')}
           style={styles.image2}
         />
-        <Image
-          source={require('../assets/images/search.png')}
-          style={styles.image3}
-        />
+        <Pressable onPress={() => setClicked(true)}>
+          <Image
+            source={require('../assets/images/search.png')}
+            style={styles.image3}
+          />
+        </Pressable>
         <Image
           source={require('../assets/images/sync_icn.png')}
           style={styles.image4}
@@ -59,30 +61,28 @@ export const SitesManager = ({navigation}) => {
         />
       </View>
 
-      <View style={styles.container2}>
-        {/* {clicked ? (
-          <SearchField/>
-        ) : ( */}
-          
-          <View>
-            <View style={styles.bodytop2}>
-              <Text style={styles.text1}>Sites</Text>
-              <Text style={styles.text2}>Social Media</Text>
-
-              <View style={styles.oval}>
-                <Text style={styles.number}>{siteData.length}</Text>
-              </View>
-              <Pressable>
-                <Image
-                  source={require('../assets/images/pathcopy.png')}
-                  style={styles.image6}
-                />
-              </Pressable>
+      {clicked ? (
+        <SearchField onPress={() => setClicked(false)} />
+      ) : (
+        <View>
+          <View style={styles.bodytop2}>
+            <Text style={styles.text1}>Sites</Text>
+            <Text style={styles.text2}>Social Media</Text>
+            <View style={styles.oval}>
+              <Text style={styles.number}>{siteData.length}</Text>
             </View>
-            <View style={styles.bottomborder}/>
-            
-            </View> 
-        {/* )} */}
+            <Pressable>
+              <Image
+                source={require('../assets/images/pathcopy.png')}
+                style={styles.image6}
+              />
+            </Pressable>
+          </View>
+          <View style={styles.bottomborder} />
+        </View>
+      )}
+
+      <View style={styles.container2}>
         <View>
           <FlatList
             data={siteData}
@@ -90,12 +90,12 @@ export const SitesManager = ({navigation}) => {
             keyExtractor={item => item.id}
           />
         </View>
-        <Button2
-          onPress={() => {
-            navigation.navigate('Add Site');
-          }}
-        />
       </View>
+      <Button2
+        onPress={() => {
+          navigation.navigate('Add Site');
+        }}
+      />
     </SafeAreaView>
   );
 };
@@ -141,7 +141,8 @@ const styles = StyleSheet.create({
     width: 30,
     borderBottomColor: '#FFA136',
     borderRadius: 1.6,
-    marginBottom:10,
+    marginBottom: 10,
+    marginLeft:17,
   },
   image1: {
     marginTop: 20,
@@ -164,7 +165,7 @@ const styles = StyleSheet.create({
     marginLeft: 30,
   },
   image6: {
-    marginTop: 13,
+    marginTop: 22,
     marginLeft: 7,
   },
   text1: {
@@ -172,6 +173,8 @@ const styles = StyleSheet.create({
     widht: 55,
     fontSize: 24,
     textAlign: 'left',
+    marginLeft:17,
+    marginTop:10,
   },
   text2: {
     width: 113,
@@ -179,6 +182,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginTop: 4,
     marginLeft: 120,
+    marginTop:15,
   },
   number: {
     height: 22,
@@ -196,6 +200,7 @@ const styles = StyleSheet.create({
     width: 29,
     backgroundColor: '#0E85FF',
     borderRadius: 20,
-    marginLeft: 8,
+    marginLeft: 10,
+    marginTop:12,
   },
 });
