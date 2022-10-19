@@ -1,44 +1,30 @@
 import React from 'react';
 
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  TextInput,
-  Pressable,
-  View,
-  Image,
-} from 'react-native';
+import {StyleSheet, Text, Pressable, View, Image} from 'react-native';
 
-export const MainComp =  ({
+export const MainComp = ({
   title = 'Facebook',
   url = 'www.facebook.com',
   uri,
   onPress,
-}) =>{
+}) => {
   return (
     <View style={styles.body}>
-    <Pressable onPress={onPress}>
-      <View style={styles.bodytop}>
-        <Image
-          source={uri ? uri : imgUrl}
-          style={styles.logo}
-        />
-        <View style={styles.bodyin}>
-          <Text style={styles.text1}>{title}</Text>
-          <Text style={styles.text2}>Copy Password</Text>
+      <Pressable onPress={onPress}>
+        <View style={styles.bodytop}>
+          <Image source={uri ? uri : imgUrl} style={styles.logo} />
+          <View style={styles.bodyin}>
+            <Text style={styles.text1}>{title}</Text>
+            <Text style={styles.text2}>Copy Password</Text>
+          </View>
         </View>
-      </View>
-      <View style={styles.view}>
-      <Pressable>
-        <Text style={styles.text3}>{url}</Text>
-      </Pressable>
-      </View>
+        <View style={styles.view}>
+          <Pressable>
+            <Text style={styles.text3}>{url}</Text>
+          </Pressable>
+        </View>
       </Pressable>
     </View>
-   
   );
 };
 
@@ -48,22 +34,21 @@ const styles = StyleSheet.create({
     width: 345,
     borderRadius: 12.6,
     marginTop: 10,
-     borderRight: 5,
+    borderRight: 5,
     backgroundColor: '#FFFFFF',
-    shadowOpacity:0.5,
-    paddingEnd:15,
+    shadowOpacity: 0.5,
+    paddingEnd: 15,
   },
   bodytop: {
     flexDirection: 'row',
-    justifyContent:'space-between',
+    justifyContent: 'space-between',
   },
   logo: {
     marginTop: 10,
-    marginLeft:5,
+    marginLeft: 5,
   },
   bodyin: {
-    marginVertical:10,
-
+    marginVertical: 10,
   },
   text1: {
     height: 24,
@@ -73,7 +58,7 @@ const styles = StyleSheet.create({
     lineheight: 24,
     marginTop: 8,
   },
-  view:{
+  view: {
     backgroundColor: '#FAFAFA',
     width: 345,
   },
@@ -90,6 +75,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     backgroundColor: '#FAFAFA',
     paddingTop: 15,
-    paddingBottom:13,
+    paddingBottom: 13,
   },
 });

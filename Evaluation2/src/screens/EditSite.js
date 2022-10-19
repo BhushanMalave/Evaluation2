@@ -2,40 +2,38 @@ import React from 'react';
 
 import {
   SafeAreaView,
-  ScrollView,
-  StatusBar,
   StyleSheet,
   Text,
-  useColorScheme,
   View,
   Pressable,
   TextInput,
-  Image,
 } from 'react-native';
 import {Formik, Field} from 'formik';
 import * as yup from 'yup';
 import Icon from 'react-native-vector-icons/AntDesign';
-import { useDispatch } from 'react-redux';
-import { useState } from 'react';
-import { useRoute } from '@react-navigation/native';
-import { editSite } from '../redux/Slice';
+import {useDispatch} from 'react-redux';
+import {useState} from 'react';
+import {useRoute} from '@react-navigation/native';
+import {editSite} from '../redux/Slice';
 
 export const EditSites = ({navigation}) => {
   const editSiteValidationSchema = yup.object().shape({});
   const route = useRoute();
-  const [siteDetails,setSiteDetails] = useState(route.params.siteDetails)
+  const [siteDetails, setSiteDetails] = useState(route.params.siteDetails);
   const dispatch = useDispatch();
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.topbar}>
-      <Icon  name="arrowleft"
-                size={25}
-                color="white"
-                style={styles.icon}
-                onPress={() => {
-                  navigation.navigate('Site Details',{siteDetails});
-                }}/>
+        <Icon
+          name="arrowleft"
+          size={25}
+          color="white"
+          style={styles.icon}
+          onPress={() => {
+            navigation.navigate('Site Details', {siteDetails});
+          }}
+        />
         <Text style={styles.text2}> Edit </Text>
       </View>
       <Formik
@@ -50,17 +48,17 @@ export const EditSites = ({navigation}) => {
         }}
         onSubmit={async values => {
           console.log(values);
-          const obj ={
-            id:siteDetails.id,
-            url:values.url,
-            siteName:values.siteName,
-            folder:values.folder,
-            userName:values.userName,
-            sitePassword:values.sitePassword,
-            notes:values.notes,
+          const obj = {
+            id: siteDetails.id,
+            url: values.url,
+            siteName: values.siteName,
+            folder: values.folder,
+            userName: values.userName,
+            sitePassword: values.sitePassword,
+            notes: values.notes,
           };
           dispatch(editSite(obj));
-          navigation.navigate("Site")
+          navigation.navigate('Site');
         }}>
         {({
           handleChange,
@@ -106,12 +104,12 @@ export const EditSites = ({navigation}) => {
               />
               <Text style={styles.text}>Site Password</Text>
               <TextInput
-              name="sitePassword"
-              onChangeText={handleChange('sitePassword')}
-              onBlur={handleBlur('sitePassword')}
-              value={values.sitePassword}
-              style={styles.textInput}
-               />
+                name="sitePassword"
+                onChangeText={handleChange('sitePassword')}
+                onBlur={handleBlur('sitePassword')}
+                value={values.sitePassword}
+                style={styles.textInput}
+              />
               <Text style={styles.text}>Notes</Text>
               <TextInput
                 multiline
@@ -125,9 +123,7 @@ export const EditSites = ({navigation}) => {
             </View>
             <View style={styles.buttonbody}>
               <Pressable
-                onPress={
-                  handleSubmit
-                }
+                onPress={handleSubmit}
                 disabled={!isValid}
                 style={styles.button}>
                 <Text style={styles.buttontext}>Update</Text>
@@ -190,12 +186,12 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 10,
   },
-  icon:{
-    marginTop:20,
-    marginLeft:5,
+  icon: {
+    marginTop: 20,
+    marginLeft: 5,
   },
   buttonbody: {
-     marginTop:Platform.OS === 'ios' ? 10 : 7,
+    marginTop: Platform.OS === 'ios' ? 10 : 7,
   },
   button: {
     height: 55,

@@ -2,23 +2,18 @@ import React from 'react';
 
 import {
   SafeAreaView,
-  ScrollView,
-  StatusBar,
   StyleSheet,
   Text,
-  useColorScheme,
   View,
   Pressable,
-  TextInput,
   Image,
   FlatList,
-  TouchableOpacity,
 } from 'react-native';
 import {MainComp} from '../assets/components/MainComponent/MainComp';
 import {Button2} from '../assets/components/Button/Buttons';
-import {Data} from '../assets/data/data';
+
 import {useSelector, useDispatch} from 'react-redux';
-import Icon from 'react-native-vector-icons/AntDesign';
+
 import {useState} from 'react';
 import SearchField from '../assets/components/MainComponent/SearchField';
 
@@ -105,20 +100,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#FAFAFA',
   },
-  SectionStyle: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#fff',
-    height: 55,
-    width: 390,
-    borderRadius: 4,
-    justifyContent: 'space-between',
-    // paddingHorizontal: 10,
-    fontWeight: 'bold',
-    padding: 10,
-    marginTop: 5,
-  },
   container2: {
     marginHorizontal: 20,
     marginVertical: 20,
@@ -142,7 +123,7 @@ const styles = StyleSheet.create({
     borderBottomColor: '#FFA136',
     borderRadius: 1.6,
     marginBottom: 10,
-    marginLeft:17,
+    marginLeft: 17,
   },
   image1: {
     marginTop: 20,
@@ -173,8 +154,8 @@ const styles = StyleSheet.create({
     widht: 55,
     fontSize: 24,
     textAlign: 'left',
-    marginLeft:17,
-    marginTop:10,
+    marginLeft: 17,
+    marginTop: 10,
   },
   text2: {
     width: 113,
@@ -182,7 +163,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginTop: 4,
     marginLeft: 120,
-    marginTop:15,
+    marginTop: 15,
   },
   number: {
     height: 22,
@@ -201,6 +182,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#0E85FF',
     borderRadius: 20,
     marginLeft: 10,
-    marginTop:12,
+    marginTop: 12,
   },
 });

@@ -2,19 +2,19 @@ import React from 'react';
 
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import { PasswordManager } from '../screens/passwordManager';
-import { SiteManagerNav } from './siteManagerNav';
+import {PasswordManager} from '../screens/passwordManager';
+import {SiteManagerNav} from './siteManagerNav';
 
 const Stack = createNativeStackNavigator();
 const theme = {
   colors: {
-    background: "transparent"
+    background: 'transparent',
   },
 };
 
-export const Router =() =>{
+export const Router = () => {
   return (
-    <NavigationContainer theme={theme}  >
+    <NavigationContainer theme={theme}>
       <Stack.Navigator>
         <Stack.Screen
           name="Password Manager"
@@ -24,11 +24,9 @@ export const Router =() =>{
         <Stack.Screen
           name="Site Manager"
           options={{headerShown: false}}
-          component={SiteManagerNav} 
-         
+          component={SiteManagerNav}
         />
       </Stack.Navigator>
     </NavigationContainer>
   );
-}
-
+};

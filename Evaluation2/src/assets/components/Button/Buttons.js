@@ -1,5 +1,12 @@
 import React from 'react';
-import {Pressable, View, Text, StyleSheet,TouchableOpacity,Image,} from 'react-native';
+import {
+  Pressable,
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+} from 'react-native';
 
 const Buttons = ({onPress, name}) => {
   return (
@@ -10,7 +17,6 @@ const Buttons = ({onPress, name}) => {
     </View>
   );
 };
-
 
 const Button2 = ({onPress, name}) => {
   return (
@@ -44,22 +50,21 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  touchableOpacity:{
-    position:'absolute',
-    width:50,
-    height:50,
-    alignItems:'center',
-    justifyContent:'center',
-    right:5,
-    bottom:0,
+  touchableOpacity: {
+    position: 'absolute',
+    width: 50,
+    height: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    right: 15,
+    bottom: 50,
   },
 
-  floatingButton:{
-    resizeMode:'contain',
-    width:48,
-    height:48
-
-  }
+  floatingButton: {
+    resizeMode: 'contain',
+    width: 48,
+    height: 48,
+  },
 });
 
-export  {Buttons,Button2};
+export {Buttons, Button2};

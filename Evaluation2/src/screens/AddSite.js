@@ -13,7 +13,7 @@ import * as yup from 'yup';
 import {addSite} from '../redux/Slice';
 import {useSelector, useDispatch} from 'react-redux';
 import Facebook from '../assets/images/Bitmap.png';
-import uuid from 'react-native-uuid';
+
 import Icon from 'react-native-vector-icons/AntDesign';
 
 const AddSite = ({navigation}) => {

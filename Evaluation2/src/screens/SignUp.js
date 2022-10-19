@@ -1,16 +1,6 @@
 import React from 'react';
 
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-  Pressable,
-  TextInput,
-} from 'react-native';
+import {SafeAreaView, StyleSheet, Text, View, TextInput} from 'react-native';
 import {Formik, Field} from 'formik';
 import * as yup from 'yup';
 import {Buttons} from '../assets/components/Button/Buttons';

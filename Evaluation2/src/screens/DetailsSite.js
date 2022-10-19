@@ -1,71 +1,58 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {useRoute} from '@react-navigation/native';
 
 import {
   SafeAreaView,
-  ScrollView,
-  StatusBar,
   StyleSheet,
   Text,
-  useColorScheme,
   View,
   Pressable,
   TextInput,
-  Image,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 
 export const DetailsSite = ({navigation}) => {
-
   const route = useRoute();
-const [siteDetails,setSiteDetails] = useState(route.params.item);
-const siteId = siteDetails.id;
+  const [siteDetails, setSiteDetails] = useState(route.params.item);
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.topbar}>
-      <Icon  name="arrowleft"
-                size={25}
-                color="white"
-                style={styles.icon}
-                onPress={() => {
-                  navigation.navigate('Site',{siteDetails});
-                }}/>
-         <Text style={styles.text2}> Site Details</Text>
-         <Pressable  onPress={()=>{navigation.navigate('Edit Site',{siteDetails})}} >
-          <Text style={styles.text3}>
-            Edit
-          </Text>
-         </Pressable>
+        <Icon
+          name="arrowleft"
+          size={25}
+          color="white"
+          style={styles.icon}
+          onPress={() => {
+            navigation.navigate('Site', {siteDetails});
+          }}
+        />
+        <Text style={styles.text2}> Site Details</Text>
+        <Pressable
+          onPress={() => {
+            navigation.navigate('Edit Site', {siteDetails});
+          }}>
+          <Text style={styles.text3}>Edit</Text>
+        </Pressable>
       </View>
       <View style={styles.body}>
         <Text style={styles.text}>URL</Text>
-        <TextInput
-        value={siteDetails.url}
-        style={styles.textInput} 
-        />
+        <TextInput value={siteDetails.url} style={styles.textInput} />
         <Text style={styles.text}>Site Name</Text>
-        <TextInput 
-        value={siteDetails.siteName}
-        style={styles.textInput} />
+        <TextInput value={siteDetails.siteName} style={styles.textInput} />
         <Text style={styles.text}>Sector/Folder</Text>
-        <TextInput 
-        value={siteDetails.folder}
-        style={styles.textInput} />
+        <TextInput value={siteDetails.folder} style={styles.textInput} />
         <Text style={styles.text}>User Name</Text>
-        <TextInput
-         value={siteDetails.userName}
-        style={styles.textInput} />
+        <TextInput value={siteDetails.userName} style={styles.textInput} />
         <Text style={styles.text}>Site Password</Text>
-        <TextInput 
-        value={siteDetails.sitePassword}
-        style={styles.textInput} />
+        <TextInput value={siteDetails.sitePassword} style={styles.textInput} />
         <Text style={styles.text}>Notes</Text>
-        <TextInput 
-         multiline
-         numberOfLines={4}
-        value={siteDetails.notes}
-        style={styles.textNotes} />
+        <TextInput
+          multiline
+          numberOfLines={4}
+          value={siteDetails.notes}
+          style={styles.textNotes}
+        />
       </View>
     </SafeAreaView>
   );
@@ -75,31 +62,30 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  topbar:{
-     backgroundColor:'#0E85FF',
-     flexDirection:'row',
-     height:60,
-     
+  topbar: {
+    backgroundColor: '#0E85FF',
+    flexDirection: 'row',
+    height: 60,
   },
-  text1:{
-    marginTop:20,
-    marginLeft:9,
+  text1: {
+    marginTop: 20,
+    marginLeft: 9,
   },
-  text2:{
-    height:28,
-    width:103,
-    fontSize:20,
-    marginTop:20,
-    marginLeft:30,
-    color:'#FFFFFF',
+  text2: {
+    height: 28,
+    width: 103,
+    fontSize: 20,
+    marginTop: 20,
+    marginLeft: 30,
+    color: '#FFFFFF',
   },
-  text3:{
-    height:28,
-    width:103,
-    fontSize:20,
-    marginTop:20,
-    marginLeft:170,
-    color:'#FFFFFF',
+  text3: {
+    height: 28,
+    width: 103,
+    fontSize: 20,
+    marginTop: 20,
+    marginLeft: 170,
+    color: '#FFFFFF',
   },
   body: {
     margin: 20,
@@ -130,8 +116,8 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 10,
   },
-  icon:{
-    marginTop:20,
-    marginLeft:5,
+  icon: {
+    marginTop: 20,
+    marginLeft: 5,
   },
 });
