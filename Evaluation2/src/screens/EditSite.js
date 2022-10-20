@@ -18,7 +18,14 @@ import {editSite} from '../redux/Slice';
 import Toast from "react-native-simple-toast";
 
 export const EditSites = ({navigation}) => {
-  const editSiteValidationSchema = yup.object().shape({});
+  const editSiteValidationSchema = yup.object().shape({
+    url: yup.string().required(),
+    sitename: yup.string().required(),
+    folder: yup.string().required(),
+    username: yup.string().required(),
+    password: yup.string().required(),
+    notes: yup.string().required(),
+  });
   const route = useRoute();
   const siteDetails = route.params.siteDetails;
   const dispatch = useDispatch();

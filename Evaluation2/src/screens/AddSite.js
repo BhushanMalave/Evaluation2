@@ -17,7 +17,14 @@ import Toast from 'react-native-simple-toast';
 import Icon from 'react-native-vector-icons/Feather';
 
 const AddSite = ({navigation}) => {
-  const editSiteValidationSchema = yup.object().shape({});
+  const addSiteValidationSchema = yup.object().shape({
+    url: yup.string().required(),
+    sitename: yup.string().required(),
+    folder: yup.string().required(),
+    username: yup.string().required(),
+    password: yup.string().required(),
+    notes: yup.string().required(),
+  });
   const siteData = useSelector(state => state.site.value);
   const dispatch = useDispatch();
   const [icon, setIcon] = useState('eye');
@@ -38,7 +45,7 @@ const AddSite = ({navigation}) => {
         <Text style={styles.text2}> Add Site </Text>
       </View>
       <Formik
-        validationSchema={editSiteValidationSchema}
+        validationSchema={addSiteValidationSchema}
         initialValues={{
           id: siteData.length + 1,
           url: ' ',
@@ -60,7 +67,6 @@ const AddSite = ({navigation}) => {
           handleBlur,
           handleSubmit,
           values,
-          errors,
           isValid,
         }) => (
           <>
