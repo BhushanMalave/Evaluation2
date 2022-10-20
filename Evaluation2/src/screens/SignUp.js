@@ -1,10 +1,12 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 import {SafeAreaView, StyleSheet, Text, View, TextInput} from 'react-native';
 import {Formik, Field} from 'formik';
 import * as yup from 'yup';
 import {Buttons} from '../assets/components/Button/Buttons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Icon from 'react-native-vector-icons/Feather';
+import Toast from 'react-native-simple-toast';
 
 export const SignUp = ({navigation}) => {
   const signupValidationSchema = yup.object().shape({
@@ -23,6 +25,9 @@ export const SignUp = ({navigation}) => {
       .required('Confirm mPin is required'),
   });
 
+  const [icon, setIcon] = useState('eye');
+  const [secureText, setSecureText] = useState('true');
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.form}>
@@ -34,7 +39,10 @@ export const SignUp = ({navigation}) => {
             try {
               const jsonValue = JSON.stringify(values);
               await AsyncStorage.setItem(values.mobileno, jsonValue);
-              alert('Successfully Added');
+              Toast.show(
+                `Congrats!!! Success \n Signin to access the vault`,
+                Toast.SHORT,
+              );
               navigation.navigate('SIGN IN');
             } catch (err) {
               console.log(err);
@@ -71,7 +79,7 @@ export const SignUp = ({navigation}) => {
                 placeholderTextColor={'grey'}
                 onBlur={handleBlur('mpin')}
                 value={values.mpin}
-                secureTextEntry
+                secureTextEntry={secureText}
                 keyboardType="numeric"
                 style={styles.field}
               />
@@ -85,9 +93,18 @@ export const SignUp = ({navigation}) => {
                 placeholderTextColor={'grey'}
                 onBlur={handleBlur('conformmpin')}
                 value={values.conformmpin}
-                secureTextEntry
-                keyboardType="numeric"
+                secureTextEntry={secureText}
                 style={styles.field}
+              />
+              <Icon
+                name={icon}
+                size={25}
+                color="grey"
+                style={styles.icon}
+                onPress={() => {
+                  setSecureText(!secureText);
+                  secureText ? setIcon('eye-off') : setIcon('eye');
+                }}
               />
               {errors.conformmpin && (
                 <Text style={{fontSize: 10, color: 'red'}}>
@@ -139,5 +156,9 @@ const styles = StyleSheet.create({
     // fontStyle: 'OpenSans Semibold',
     textAlign: 'center',
     color: '#0E85FF',
+  },
+  icon: {
+    left: 290,
+    bottom: 53,
   },
 });

@@ -10,23 +10,26 @@ import {
 } from 'react-native';
 import {Formik, Field} from 'formik';
 import * as yup from 'yup';
-import Icon from 'react-native-vector-icons/AntDesign';
+import Icon from 'react-native-vector-icons/Feather';
 import {useDispatch} from 'react-redux';
 import {useState} from 'react';
 import {useRoute} from '@react-navigation/native';
 import {editSite} from '../redux/Slice';
+import Toast from "react-native-simple-toast";
 
 export const EditSites = ({navigation}) => {
   const editSiteValidationSchema = yup.object().shape({});
   const route = useRoute();
   const [siteDetails, setSiteDetails] = useState(route.params.siteDetails);
   const dispatch = useDispatch();
+  const [icon, setIcon] = useState('eye');
+  const [secureText, setSecureText] = useState('true');
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.topbar}>
         <Icon
-          name="arrowleft"
+          name="arrow-left"
           size={25}
           color="white"
           style={styles.icon}
@@ -46,7 +49,7 @@ export const EditSites = ({navigation}) => {
           sitePassword: siteDetails.sitePassword,
           notes: siteDetails.notes,
         }}
-        onSubmit={async values => {
+        onSubmit={ values => {
           console.log(values);
           const obj = {
             id: siteDetails.id,
@@ -59,7 +62,10 @@ export const EditSites = ({navigation}) => {
           };
           dispatch(editSite(obj));
           navigation.navigate('Site');
-          alert('Updated Successfully')
+          Toast.show(
+            `Updated Successfully`,
+            Toast.SHORT,
+          );
         }}>
         {({
           handleChange,
@@ -110,6 +116,17 @@ export const EditSites = ({navigation}) => {
                 onBlur={handleBlur('sitePassword')}
                 value={values.sitePassword}
                 style={styles.textInput}
+                secureTextEntry={secureText}
+              />
+              <Icon
+                name={icon}
+                size={20}
+                color="grey"
+                style={styles.iconpassword}
+                onPress={() => {
+                  setSecureText(!secureText);
+                  secureText ? setIcon('eye-off') : setIcon('eye');
+                }}
               />
               <Text style={styles.text}>Notes</Text>
               <TextInput
@@ -145,6 +162,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#0E85FF',
     flexDirection: 'row',
     height: 60,
+  },
+  iconpassword: {
+    left: 300,
+    bottom: 40,
   },
   text1: {
     marginTop: 20,
@@ -192,7 +213,7 @@ const styles = StyleSheet.create({
     marginLeft: 5,
   },
   buttonbody: {
-    marginTop: Platform.OS === 'ios' ? 10 : 7,
+    marginTop: Platform.OS === 'ios' ? 0 : 7,
   },
   button: {
     height: 55,

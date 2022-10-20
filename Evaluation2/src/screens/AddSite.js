@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 import {
   SafeAreaView,
@@ -13,18 +13,20 @@ import * as yup from 'yup';
 import {addSite} from '../redux/Slice';
 import {useSelector, useDispatch} from 'react-redux';
 import Facebook from '../assets/images/Bitmap.png';
-
-import Icon from 'react-native-vector-icons/AntDesign';
+import Toast from 'react-native-simple-toast';
+import Icon from 'react-native-vector-icons/Feather';
 
 const AddSite = ({navigation}) => {
   const editSiteValidationSchema = yup.object().shape({});
   const siteData = useSelector(state => state.site.value);
   const dispatch = useDispatch();
+  const [icon, setIcon] = useState('eye');
+  const [secureText, setSecureText] = useState('true');
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.topbar}>
         <Icon
-          name="arrowleft"
+          name="arrow-left"
           size={25}
           color="white"
           style={styles.icon}
@@ -50,6 +52,7 @@ const AddSite = ({navigation}) => {
         onSubmit={values => {
           console.log(values);
           dispatch(addSite(values));
+          Toast.show(`Saved Successfully`, Toast.SHORT);
           navigation.navigate('Site');
         }}>
         {({
@@ -101,6 +104,17 @@ const AddSite = ({navigation}) => {
                 onBlur={handleBlur('sitePassword')}
                 value={values.sitePassword}
                 style={styles.textInput}
+                secureTextEntry={secureText}
+              />
+              <Icon
+                name={icon}
+                size={20}
+                color="grey"
+                style={styles.iconpassword}
+                onPress={() => {
+                  setSecureText(!secureText);
+                  secureText ? setIcon('eye-off') : setIcon('eye');
+                }}
               />
               <Text style={styles.text}>Notes</Text>
               <TextInput
@@ -134,6 +148,10 @@ const AddSite = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  iconpassword: {
+    left: 300,
+    bottom: 40,
   },
   body: {
     margin: 20,
@@ -183,7 +201,7 @@ const styles = StyleSheet.create({
   },
   buttonbody: {
     flexDirection: 'row',
-    marginTop: Platform.OS === 'ios' ? 15 : 7,
+    marginTop: Platform.OS === 'ios' ? -5 : 7,
   },
   button1: {
     height: 55,

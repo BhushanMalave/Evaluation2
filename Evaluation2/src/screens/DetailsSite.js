@@ -9,17 +9,19 @@ import {
   Pressable,
   TextInput,
 } from 'react-native';
-import Icon from 'react-native-vector-icons/AntDesign';
+import Icon from 'react-native-vector-icons/Feather';
 
 export const DetailsSite = ({navigation}) => {
   const route = useRoute();
   const [siteDetails, setSiteDetails] = useState(route.params.item);
+  const [icon, setIcon] = useState('eye');
+  const [secureText, setSecureText] = useState('true');
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.topbar}>
         <Icon
-          name="arrowleft"
+          name="arrow-left"
           size={25}
           color="white"
           style={styles.icon}
@@ -45,7 +47,21 @@ export const DetailsSite = ({navigation}) => {
         <Text style={styles.text}>User Name</Text>
         <TextInput value={siteDetails.userName} style={styles.textInput} />
         <Text style={styles.text}>Site Password</Text>
-        <TextInput value={siteDetails.sitePassword} style={styles.textInput} />
+        <TextInput
+          value={siteDetails.sitePassword}
+          secureTextEntry={secureText}
+          style={styles.textInput}
+        />
+        <Icon
+          name={icon}
+          size={20}
+          color="grey"
+          style={styles.iconpassword}
+          onPress={() => {
+            setSecureText(!secureText);
+            secureText ? setIcon('eye-off') : setIcon('eye');
+          }}
+        />
         <Text style={styles.text}>Notes</Text>
         <TextInput
           multiline
@@ -61,6 +77,10 @@ export const DetailsSite = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  iconpassword: {
+    left: 300,
+    bottom: 40,
   },
   topbar: {
     backgroundColor: '#0E85FF',

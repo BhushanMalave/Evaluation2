@@ -6,6 +6,7 @@
 	<array>
 		<string>AntDesign.ttf</string>
 		<string>FontAwesome.ttf</string>
+		<string>Feather.ttf</string>
 	</array>
 	<key>CFBundleIconFile</key>
 	<string></string>
