@@ -32,7 +32,7 @@ const SignIn = ({navigation}) => {
   });
 
   const [icon,setIcon] = useState('eye');
-  const [secureTextEntry,setSecureTextEntry] = useState('true');
+  const [secureText,setSecureText] = useState(true);
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.form}>
@@ -98,8 +98,8 @@ const SignIn = ({navigation}) => {
                   placeholderTextColor={'grey'}
                   onBlur={handleBlur('mpin')}
                   value={values.mpin}
-                 
-                  secureTextEntry={secureTextEntry}
+                
+                   secureTextEntry={secureText}
                 />
                 {errors.mpin && (
                   <Text style={{fontSize: 10, color: 'red'}}>
@@ -112,8 +112,8 @@ const SignIn = ({navigation}) => {
                   color="grey"
                   style={styles.icon}
                   onPress={() => {
-                    setSecureTextEntry(!secureTextEntry);
-                    secureTextEntry ? setIcon('eye-off') : setIcon('eye');
+                    setSecureText(!secureText);
+                    secureText ? setIcon('eye-off') : setIcon('eye');
                   }}
                 />
               
@@ -171,7 +171,7 @@ const styles = StyleSheet.create({
   },
   icon:{
     left:290,
-    bottom:53,
+    bottom:63,
   },
   textbox: {
     flexDirection: 'row',

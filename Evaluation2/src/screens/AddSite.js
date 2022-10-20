@@ -21,7 +21,7 @@ const AddSite = ({navigation}) => {
   const siteData = useSelector(state => state.site.value);
   const dispatch = useDispatch();
   const [icon, setIcon] = useState('eye');
-  const [secureText, setSecureText] = useState('true');
+  const [secureText, setSecureText] = useState(true);
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.topbar}>
@@ -101,10 +101,11 @@ const AddSite = ({navigation}) => {
               <TextInput
                 name="sitePassword"
                 onChangeText={handleChange('sitePassword')}
+                secureTextEntry={secureText}
                 onBlur={handleBlur('sitePassword')}
                 value={values.sitePassword}
                 style={styles.textInput}
-                secureTextEntry={secureText}
+                
               />
               <Icon
                 name={icon}

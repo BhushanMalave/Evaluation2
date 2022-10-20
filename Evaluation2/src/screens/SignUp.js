@@ -26,7 +26,7 @@ export const SignUp = ({navigation}) => {
   });
 
   const [icon, setIcon] = useState('eye');
-  const [secureText, setSecureText] = useState('true');
+  const [secureText, setSecureText] = useState(true);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -80,7 +80,6 @@ export const SignUp = ({navigation}) => {
                 onBlur={handleBlur('mpin')}
                 value={values.mpin}
                 secureTextEntry={secureText}
-                keyboardType="numeric"
                 style={styles.field}
               />
               {errors.mpin && (

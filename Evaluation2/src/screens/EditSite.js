@@ -20,10 +20,10 @@ import Toast from "react-native-simple-toast";
 export const EditSites = ({navigation}) => {
   const editSiteValidationSchema = yup.object().shape({});
   const route = useRoute();
-  const [siteDetails, setSiteDetails] = useState(route.params.siteDetails);
+  const siteDetails = route.params.siteDetails;
   const dispatch = useDispatch();
   const [icon, setIcon] = useState('eye');
-  const [secureText, setSecureText] = useState('true');
+  const [secureText, setSecureText] = useState(true);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -113,10 +113,11 @@ export const EditSites = ({navigation}) => {
               <TextInput
                 name="sitePassword"
                 onChangeText={handleChange('sitePassword')}
+                secureTextEntry={secureText}
                 onBlur={handleBlur('sitePassword')}
                 value={values.sitePassword}
                 style={styles.textInput}
-                secureTextEntry={secureText}
+               
               />
               <Icon
                 name={icon}
