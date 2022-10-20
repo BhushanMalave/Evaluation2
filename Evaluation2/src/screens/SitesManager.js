@@ -16,9 +16,11 @@ import {useSelector, useDispatch} from 'react-redux';
 
 import {useState} from 'react';
 import SearchField from '../assets/components/MainComponent/SearchField';
+import {filterSite} from '../redux/Slice';
 
 export const SitesManager = ({navigation}) => {
   const [clicked, setClicked] = useState(false);
+  const dispatch = useDispatch();
   const siteData = useSelector(state => state.site.value);
   const renderItem = ({item}) => (
     <MainComp
@@ -57,7 +59,7 @@ export const SitesManager = ({navigation}) => {
       </View>
 
       {clicked ? (
-        <SearchField onPress={() => setClicked(false)} />
+        <SearchField onChangeText={text => dispatch(filterSite(text))} />
       ) : (
         <View>
           <View style={styles.bodytop2}>
@@ -171,8 +173,8 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     // fontFamily: 'Open Sans',
     fontSize: 16,
-    marginLeft: 7,
-    marginTop: 2,
+    marginLeft: Platform.OS === 'ios' ? 7 : 9,
+    marginTop: Platform.OS === 'ios' ? 2 : 1,
   },
   oval: {
     alignItems: 'center',

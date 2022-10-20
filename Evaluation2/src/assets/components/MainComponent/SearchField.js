@@ -1,19 +1,14 @@
 import React from 'react';
 import {TextInput, View, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
-const SearchField = ({onPress}) => {
+const SearchField = ({onChangeText}) => {
   return (
     <View style={styles.SectionStyle}>
       <TextInput
+        onChangeText={onChangeText}
         style={styles.text}
         placeholder="Type Keywords to search"></TextInput>
-      <Icon
-        name="arrowright"
-        size={25}
-        color="#0E85FF"
-        style={styles.icon}
-        onPress={onPress}
-      />
+      <Icon name="arrowright" size={25} color="#0E85FF" style={styles.icon} />
     </View>
   );
 };
@@ -36,5 +31,6 @@ const styles = StyleSheet.create({
   },
   text: {
     marginLeft: 20,
+    width:300,
   },
 });

@@ -52,10 +52,17 @@ export const Slice = createSlice({
   name: 'site',
   initialState: {
     value: initialState,
+    filterValue: initialState,
   },
   reducers: {
     addSite: (state, action) => {
       state.value.push(action.payload);
+      state.filterValue.push(action.payload);
+    },
+    filterSite: (state, action) => {
+      state.value = state.filterValue.filter(item =>
+        item.siteName.toLowerCase().includes(action.payload.toLowerCase()),
+      );
     },
     editSite: (state, action) => {
       state.value.map(site => {
@@ -72,7 +79,6 @@ export const Slice = createSlice({
   },
 });
 
-// Action creators are generated for each case reducer function
-export const {addSite, editSite} = Slice.actions;
+export const {addSite, editSite, filterSite} = Slice.actions;
 
 export default Slice.reducer;

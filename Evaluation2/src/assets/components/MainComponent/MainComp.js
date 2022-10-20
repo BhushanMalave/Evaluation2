@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
   },
   text1: {
     height: 24,
-    width: 83,
+    width: 100,
     color: '#0E85FF',
     fontSize: 18,
     lineheight: 24,
