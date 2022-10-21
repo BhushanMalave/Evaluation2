@@ -17,6 +17,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import {useState} from 'react';
 import SearchField from '../assets/components/MainComponent/SearchField';
 import {filterSite} from '../redux/Slice';
+import { deleteSite } from '../redux/Slice';
 
 export const SitesManager = ({navigation}) => {
   const [clicked, setClicked] = useState(false);
@@ -28,6 +29,7 @@ export const SitesManager = ({navigation}) => {
       uri={item.icon}
       url={item.url}
       onPress={() => navigation.navigate('Site Details', {item})}
+      onLongPress={() => dispatch(deleteSite(item))}
     />
   );
 

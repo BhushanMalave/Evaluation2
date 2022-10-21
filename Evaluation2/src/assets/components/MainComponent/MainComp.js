@@ -1,16 +1,17 @@
 import React from 'react';
 
-import {StyleSheet, Text, Pressable, View, Image} from 'react-native';
+import {StyleSheet, Text, Pressable, View, Image, TouchableOpacity} from 'react-native';
 
 export const MainComp = ({
   title = 'Facebook',
   url = 'www.facebook.com',
   uri,
   onPress,
+  onLongPress,
 }) => {
   return (
     <View style={styles.body}>
-      <Pressable onPress={onPress}>
+      <TouchableOpacity onPress={onPress} onLongPress={onLongPress}>
         <View style={styles.bodytop}>
           <Image source={uri ? uri : imgUrl} style={styles.logo} />
           <View style={styles.bodyin}>
@@ -23,7 +24,7 @@ export const MainComp = ({
             <Text style={styles.text3}>{url}</Text>
           </Pressable>
         </View>
-      </Pressable>
+      </TouchableOpacity>
     </View>
   );
 };

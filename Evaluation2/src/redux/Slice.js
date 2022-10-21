@@ -64,6 +64,9 @@ export const Slice = createSlice({
         item.siteName.toLowerCase().includes(action.payload.toLowerCase()),
       );
     },
+    deleteSite: (state, action) => {
+      state.value = state.value.filter(item => item.id !== action.payload.id);
+    },
     editSite: (state, action) => {
       state.value.map(site => {
         if (site.id === action.payload.id) {
@@ -79,6 +82,6 @@ export const Slice = createSlice({
   },
 });
 
-export const {addSite, editSite, filterSite} = Slice.actions;
+export const {addSite, editSite, filterSite,deleteSite} = Slice.actions;
 
 export default Slice.reducer;
