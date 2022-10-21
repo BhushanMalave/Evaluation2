@@ -7,6 +7,7 @@ import {
   View,
   Pressable,
   TextInput,
+  ScrollView,
 } from 'react-native';
 import {Formik, Field} from 'formik';
 import * as yup from 'yup';
@@ -62,6 +63,7 @@ export const EditSites = ({navigation}) => {
         />
         <Text style={styles.text2}> Edit </Text>
       </View>
+      <ScrollView>
       <Formik
         validationSchema={editSiteValidationSchema}
         initialValues={{
@@ -164,6 +166,7 @@ export const EditSites = ({navigation}) => {
           </>
         )}
       </Formik>
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -171,6 +174,7 @@ export const EditSites = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor:'white',
   },
   topbar: {
     backgroundColor: '#0E85FF',
@@ -209,18 +213,18 @@ const styles = StyleSheet.create({
   },
   dropDownBox: {
     height: 43,
-    width: 350,
     borderColor: '#D7D7D7',
     backgroundColor: '#F5F7FB',
     borderRadius: 4,
     borderWidth: 1,
     marginTop: 10,
     marginBottom: 10,
+    color: 'black',
   },
   dropDropInput: {
     fontSize: 13,
     fontWeight: '200',
-    color: 'bol',
+    textDecorationColor:'black',
   },
   dropDown: {
     width: 321,
@@ -231,6 +235,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     marginVertical: 10.5,
     padding: 10,
+    color: 'black',
   },
   text: {
     height: 24,
@@ -247,6 +252,7 @@ const styles = StyleSheet.create({
     borderColor: '#D7D7D7',
     marginTop: 10,
     marginBottom: 10,
+    color:'black',
   },
   icon: {
     marginTop: 20,
@@ -264,7 +270,7 @@ const styles = StyleSheet.create({
   },
   buttontext: {
     height: 28,
-    width: 65,
+    width: 80,
     color: '#FFFFFF',
     fontSize: 20,
     textAlign: 'center',

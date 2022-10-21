@@ -32,7 +32,6 @@ export const MainComp = ({
 const styles = StyleSheet.create({
   body: {
     height: 120,
-    width: 345,
     borderRadius: 12.6,
     marginTop: 10,
     borderRight: 5,
@@ -61,7 +60,6 @@ const styles = StyleSheet.create({
   },
   view: {
     backgroundColor: '#FAFAFA',
-    width: 345,
   },
   text2: {
     height: 15,

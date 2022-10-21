@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-import {SafeAreaView, StyleSheet, Text, View, TextInput} from 'react-native';
+import {SafeAreaView, StyleSheet, Text, View, TextInput, ScrollView} from 'react-native';
 import {Formik, Field} from 'formik';
 import * as yup from 'yup';
 import {Buttons} from '../assets/components/Button/Buttons';
@@ -31,10 +31,11 @@ export const SignUp = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.form}>
+        <ScrollView>
         <Formik
           validationSchema={signupValidationSchema}
           initialValues={{mobileno: '', mpin: '', conformmpin: ''}}
-          onSubmit={async values => {
+          onSubmit={async (values,{resetForm}) => {
             console.log(values);
             try {
               const jsonValue = JSON.stringify(values);
@@ -44,6 +45,7 @@ export const SignUp = ({navigation}) => {
                 Toast.SHORT,
               );
               navigation.navigate('SIGN IN');
+              resetForm({initialValues: ''})
             } catch (err) {
               console.log(err);
             }
@@ -52,6 +54,7 @@ export const SignUp = ({navigation}) => {
             handleChange,
             handleBlur,
             handleSubmit,
+            resetForm,
             values,
             errors,
             isValid,
@@ -116,13 +119,14 @@ export const SignUp = ({navigation}) => {
               <View style={styles.button}>
                 <Buttons
                   name="SIGN UP"
-                  onPress={handleSubmit}
+                  onPress={(initialValues)=>{handleSubmit();}}
                   disabled={!isValid}
                 />
               </View>
             </>
           )}
         </Formik>
+        </ScrollView>
       </View>
     </SafeAreaView>
   );

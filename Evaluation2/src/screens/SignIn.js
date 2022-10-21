@@ -8,6 +8,7 @@ import {
   Pressable,
   View,
   Image,
+  ScrollView,
 } from 'react-native';
 
 import {Formik} from 'formik';
@@ -35,107 +36,113 @@ const SignIn = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.form}>
-        <Formik
-          validationSchema={signinValidationSchema}
-          initialValues={{mobileno: '', mpin: ''}}
-          onSubmit={async values => {
-            try {
-              const jsonValue = await AsyncStorage.getItem(values.mobileno);
+        <ScrollView>
+          <Formik
+            validationSchema={signinValidationSchema}
+            initialValues={{mobileno: '', mpin: ''}}
+            onSubmit={async (values, {resetForm}) => {
+              try {
+                const jsonValue = await AsyncStorage.getItem(values.mobileno);
 
-              if (jsonValue != null) {
-                parseValue = JSON.parse(jsonValue);
+                if (jsonValue != null) {
+                  parseValue = JSON.parse(jsonValue);
 
-                if (
-                  values.mobileno === parseValue.mobileno &&
-                  values.mpin === parseValue.mpin
-                ) {
-                  Toast.show(`Congrats!!! Success `, Toast.SHORT);
-
-                  navigation.navigate('Site Manager');
+                  if (
+                    values.mobileno === parseValue.mobileno &&
+                    values.mpin === parseValue.mpin
+                  ) {
+                    Toast.show(`Congrats!!! Success `, Toast.SHORT);
+                    navigation.navigate('Site Manager');
+                    resetForm({initialValues});
+                  }
+                } else {
+                  Toast.show(
+                    `Enter Correct Mobile Number and MPin `,
+                    Toast.SHORT,
+                  );
                 }
-              } else {
-                Toast.show(
-                  `Enter Correct Mobile Number and MPin `,
-                  Toast.SHORT,
-                );
+              } catch (err) {
+                console.log(err);
               }
-            } catch (err) {
-              console.log(err);
-            }
-          }}>
-          {({
-            handleChange,
-            handleBlur,
-            handleSubmit,
-            values,
-            errors,
-            isValid,
-          }) => (
-            <>
-              <TextInput
-                name="mobileno"
-                placeholder="     Mobile Number"
-                placeholderTextColor={'grey'}
-                style={styles.textInput}
-                onChangeText={handleChange('mobileno')}
-                onBlur={handleBlur('mobileno')}
-                value={values.mobileno}
-                keyboardType="number-pad"
-              />
-              {errors.mobileno && (
-                <Text style={{fontSize: 10, color: 'red'}}>
-                  {errors.mobileno}
-                </Text>
-              )}
-
-              <TextInput
-                name="mpin"
-                placeholder="    MPin"
-                style={styles.textInput}
-                onChangeText={handleChange('mpin')}
-                placeholderTextColor={'grey'}
-                onBlur={handleBlur('mpin')}
-                value={values.mpin}
-                keyboardType="number-pad"
-                secureTextEntry={secureText}
-              />
-              {errors.mpin && (
-                <Text style={{fontSize: 10, color: 'red'}}>{errors.mpin}</Text>
-              )}
-              <Icon
-                name={icon}
-                size={25}
-                color="grey"
-                style={styles.icon}
-                onPress={() => {
-                  setSecureText(!secureText);
-                  secureText ? setIcon('eye-off') : setIcon('eye');
-                }}
-              />
-
-              <Pressable style={{}}>
-                <Text style={styles.text}>Forgot your Password?</Text>
-              </Pressable>
-              <View style={styles.button}>
-                <Buttons
-                  name="SIGN IN"
-                  onPress={handleSubmit}
-                  disabled={!isValid}
+            }}>
+            {({
+              handleChange,
+              handleBlur,
+              handleSubmit,
+              values,
+              errors,
+              isValid,
+            }) => (
+              <>
+                <TextInput
+                  name="mobileno"
+                  placeholder="     Mobile Number"
+                  placeholderTextColor={'grey'}
+                  style={styles.textInput}
+                  onChangeText={handleChange('mobileno')}
+                  onBlur={handleBlur('mobileno')}
+                  value={values.mobileno}
+                  keyboardType="number-pad"
                 />
-              </View>
+                {errors.mobileno && (
+                  <Text style={{fontSize: 10, color: 'red'}}>
+                    {errors.mobileno}
+                  </Text>
+                )}
 
-              <View style={styles.finger}>
-                <Image
-                  source={require('../assets/images/fingerprinticon.png')}
+                <TextInput
+                  name="mpin"
+                  placeholder="    MPin"
+                  style={styles.textInput}
+                  onChangeText={handleChange('mpin')}
+                  placeholderTextColor={'grey'}
+                  onBlur={handleBlur('mpin')}
+                  value={values.mpin}
+                  keyboardType="number-pad"
+                  secureTextEntry={secureText}
                 />
-              </View>
-              <View style={styles.textbox}>
-                <Text style={styles.text1}>OR</Text>
-                <Text style={styles.text3}>USE YOUR FINGERPRINT TO LOGIN</Text>
-              </View>
-            </>
-          )}
-        </Formik>
+                {errors.mpin && (
+                  <Text style={{fontSize: 10, color: 'red'}}>
+                    {errors.mpin}
+                  </Text>
+                )}
+                <Icon
+                  name={icon}
+                  size={25}
+                  color="grey"
+                  style={styles.icon}
+                  onPress={() => {
+                    setSecureText(!secureText);
+                    secureText ? setIcon('eye-off') : setIcon('eye');
+                  }}
+                />
+
+                <Pressable style={{}}>
+                  <Text style={styles.text}>Forgot your Password?</Text>
+                </Pressable>
+                <View style={styles.button}>
+                  <Buttons
+                    name="SIGN IN"
+                    onPress={handleSubmit}
+                    disabled={!isValid}
+                  />
+                </View>
+
+                <View style={styles.finger}>
+                  <Image
+                    source={require('../assets/images/fingerprinticon.png')}
+                  />
+                </View>
+                <View style={styles.textbox}>
+                  <Text style={styles.text1}>OR</Text>
+                  <Text style={styles.text3}>
+                    USE YOUR FINGERPRINT TO LOGIN
+                  </Text>
+                </View>
+              </>
+            )}
+          </Formik>
+        </ScrollView>
       </View>
     </SafeAreaView>
   );
@@ -152,7 +159,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 3,
     fontSize: 16,
-    color:'black',
+    color: 'black',
   },
   form: {
     marginTop: 30,

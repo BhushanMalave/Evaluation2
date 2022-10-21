@@ -8,6 +8,7 @@ import {
   View,
   Pressable,
   TextInput,
+  ScrollView,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 
@@ -20,6 +21,7 @@ export const DetailsSite = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.topbar}>
+        <View  style={styles.topbarin}>
         <Icon
           name="arrow-left"
           size={25}
@@ -30,6 +32,7 @@ export const DetailsSite = ({navigation}) => {
           }}
         />
         <Text style={styles.text2}> Site Details</Text>
+        </View>
         <Pressable
           onPress={() => {
             navigation.navigate('Edit Site', {siteDetails});
@@ -37,6 +40,7 @@ export const DetailsSite = ({navigation}) => {
           <Text style={styles.text3}>Edit</Text>
         </Pressable>
       </View>
+      <ScrollView>
       <View style={styles.body}>
         <Text style={styles.text}>URL</Text>
         <TextInput value={siteDetails.url} style={styles.textInput} />
@@ -70,6 +74,7 @@ export const DetailsSite = ({navigation}) => {
           style={styles.textNotes}
         />
       </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -77,6 +82,7 @@ export const DetailsSite = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor:'white',
   },
   iconpassword: {
     left: 300,
@@ -85,7 +91,12 @@ const styles = StyleSheet.create({
   topbar: {
     backgroundColor: '#0E85FF',
     flexDirection: 'row',
+    justifyContent:'space-between',
     height: 60,
+  },
+  topbarin:{
+    flexDirection:'row',
+   
   },
   text1: {
     marginTop: 20,
@@ -95,8 +106,8 @@ const styles = StyleSheet.create({
     height: 28,
     width: 103,
     fontSize: 20,
-    marginTop: 20,
-    marginLeft: 30,
+    marginLeft:15,
+    marginTop:20,
     color: '#FFFFFF',
   },
   text3: {
@@ -136,6 +147,7 @@ const styles = StyleSheet.create({
     borderColor: '#D7D7D7',
     marginTop: 10,
     marginBottom: 10,
+    color:'black',
   },
   icon: {
     marginTop: 20,

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {SafeAreaView, StyleSheet, Image, View} from 'react-native';
+import {SafeAreaView, StyleSheet, Image, View, ScrollView} from 'react-native';
 
 import PasswordManagerNav from '../navigation/passwordManagerNav';
 import LinearGradient from 'react-native-linear-gradient';

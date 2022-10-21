@@ -7,6 +7,7 @@ import {
   View,
   Pressable,
   TextInput,
+  ScrollView,
 } from 'react-native';
 import {Formik, Field} from 'formik';
 import * as yup from 'yup';
@@ -70,6 +71,7 @@ const AddSite = ({navigation}) => {
 
         <Text style={styles.text2}> Add Site </Text>
       </View>
+      <ScrollView>
       <Formik
         validationSchema={addSiteValidationSchema}
         initialValues={initialValues}
@@ -124,13 +126,6 @@ const AddSite = ({navigation}) => {
                 dropdownStyles={styles.dropDown}
                 values={selected}
               />
-              {/* <TextInput
-                name="folder"
-                onChangeText={handleChange('folder')}
-                onBlur={handleBlur('folder')}
-                value={values.folder}
-                style={styles.textInput}
-              /> */}
               <Text style={styles.text}>User Name</Text>
               <TextInput
                 name="userName"
@@ -185,6 +180,7 @@ const AddSite = ({navigation}) => {
           </>
         )}
       </Formik>
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -192,6 +188,7 @@ const AddSite = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor:'white',
   },
   iconpassword: {
     left: 300,
@@ -230,7 +227,7 @@ const styles = StyleSheet.create({
   },
   dropDownBox: {
     height: 43,
-    width: 350,
+   
     borderColor: '#D7D7D7',
     backgroundColor: '#F5F7FB',
     borderRadius: 4,
@@ -268,14 +265,17 @@ const styles = StyleSheet.create({
     borderColor: '#D7D7D7',
     marginTop: 10,
     marginBottom: 10,
+    color:'black',
   },
   buttonbody: {
     flexDirection: 'row',
+    width:'100%',
     marginTop: Platform.OS === 'ios' ? -5 : -13,
+    flex:1,
   },
   button1: {
     height: 55,
-    width: 196,
+    width:'50%',
     backgroundColor: '#0E85FF',
     marginLeft: 2,
     alignItems: 'center',
@@ -283,14 +283,14 @@ const styles = StyleSheet.create({
   },
   button: {
     height: 55,
-    width: 195,
+    width:'50%',
     backgroundColor: '#0E85FF',
     alignItems: 'center',
     justifyContent: 'center',
   },
   buttontext: {
     height: 28,
-    width: 52,
+    width: 60,
     color: '#FFFFFF',
     fontSize: 20,
   },
