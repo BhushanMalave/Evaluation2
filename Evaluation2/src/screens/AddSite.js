@@ -19,10 +19,10 @@ import Icon from 'react-native-vector-icons/Feather';
 const AddSite = ({navigation}) => {
   const addSiteValidationSchema = yup.object().shape({
     url: yup.string().required(),
-    sitename: yup.string().required(),
+    siteName: yup.string().required(),
     folder: yup.string().required(),
-    username: yup.string().required(),
-    password: yup.string().required(),
+    userName: yup.string().required(),
+    sitePassword: yup.string().required(),
     notes: yup.string().required(),
   });
   const siteData = useSelector(state => state.site.value);
@@ -62,13 +62,7 @@ const AddSite = ({navigation}) => {
           Toast.show(`Saved Successfully`, Toast.SHORT);
           navigation.navigate('Site');
         }}>
-        {({
-          handleChange,
-          handleBlur,
-          handleSubmit,
-          values,
-          isValid,
-        }) => (
+        {({handleChange, handleBlur, handleSubmit, values, isValid}) => (
           <>
             <View style={styles.body}>
               <Text style={styles.text}>URL</Text>
@@ -111,7 +105,6 @@ const AddSite = ({navigation}) => {
                 onBlur={handleBlur('sitePassword')}
                 value={values.sitePassword}
                 style={styles.textInput}
-                
               />
               <Icon
                 name={icon}

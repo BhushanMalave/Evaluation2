@@ -60,7 +60,7 @@ export const SignUp = ({navigation}) => {
               <TextInput
                 name="mobileno"
                 placeholder="   Enter Mobile Number"
-                keyboardType="numeric"
+                keyboardType="number-pad"
                 placeholderTextColor="grey"
                 onChangeText={handleChange('mobileno')}
                 onBlur={handleBlur('mobileno')}
@@ -79,6 +79,7 @@ export const SignUp = ({navigation}) => {
                 placeholderTextColor={'grey'}
                 onBlur={handleBlur('mpin')}
                 value={values.mpin}
+                keyboardType="number-pad"
                 secureTextEntry={secureText}
                 style={styles.field}
               />
@@ -92,6 +93,7 @@ export const SignUp = ({navigation}) => {
                 placeholderTextColor={'grey'}
                 onBlur={handleBlur('conformmpin')}
                 value={values.conformmpin}
+                keyboardType="number-pad"
                 secureTextEntry={secureText}
                 style={styles.field}
               />

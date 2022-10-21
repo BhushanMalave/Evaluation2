@@ -59,7 +59,7 @@ export const SitesManager = ({navigation}) => {
       </View>
 
       {clicked ? (
-        <SearchField onChangeText={text => dispatch(filterSite(text))} />
+        <SearchField onChangeText={text => dispatch(filterSite(text))} onPress={() => setClicked(false)} />
       ) : (
         <View>
           <View style={styles.bodytop2}>

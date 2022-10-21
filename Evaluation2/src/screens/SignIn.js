@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 
 import {
   SafeAreaView,
@@ -16,7 +16,7 @@ import * as yup from 'yup';
 import {Buttons} from '../assets/components/Button/Buttons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Icon from 'react-native-vector-icons/Feather';
-import Toast from "react-native-simple-toast";
+import Toast from 'react-native-simple-toast';
 
 const SignIn = ({navigation}) => {
   const signinValidationSchema = yup.object().shape({
@@ -31,8 +31,8 @@ const SignIn = ({navigation}) => {
       .required('mPin is required'),
   });
 
-  const [icon,setIcon] = useState('eye');
-  const [secureText,setSecureText] = useState(true);
+  const [icon, setIcon] = useState('eye');
+  const [secureText, setSecureText] = useState(true);
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.form}>
@@ -51,10 +51,7 @@ const SignIn = ({navigation}) => {
                   values.mobileno === parseValue.mobileno &&
                   values.mpin === parseValue.mpin
                 ) {
-                  Toast.show(
-                    `Congrats!!! Success `,
-                    Toast.SHORT,
-                  );
+                  Toast.show(`Congrats!!! Success `, Toast.SHORT);
 
                   navigation.navigate('Site Manager');
                 }
@@ -89,34 +86,32 @@ const SignIn = ({navigation}) => {
                   {errors.mobileno}
                 </Text>
               )}
-              
-                <TextInput
-                  name="mpin"
-                  placeholder="    MPin"
-                  style={styles.textInput}
-                  onChangeText={handleChange('mpin')}
-                  placeholderTextColor={'grey'}
-                  onBlur={handleBlur('mpin')}
-                  value={values.mpin}
-                
-                   secureTextEntry={secureText}
-                />
-                {errors.mpin && (
-                  <Text style={{fontSize: 10, color: 'red'}}>
-                    {errors.mpin}
-                  </Text>
-                )}
-                <Icon
-                  name={icon}
-                  size={25}
-                  color="grey"
-                  style={styles.icon}
-                  onPress={() => {
-                    setSecureText(!secureText);
-                    secureText ? setIcon('eye-off') : setIcon('eye');
-                  }}
-                />
-              
+
+              <TextInput
+                name="mpin"
+                placeholder="    MPin"
+                style={styles.textInput}
+                onChangeText={handleChange('mpin')}
+                placeholderTextColor={'grey'}
+                onBlur={handleBlur('mpin')}
+                value={values.mpin}
+                keyboardType="number-pad"
+                secureTextEntry={secureText}
+              />
+              {errors.mpin && (
+                <Text style={{fontSize: 10, color: 'red'}}>{errors.mpin}</Text>
+              )}
+              <Icon
+                name={icon}
+                size={25}
+                color="grey"
+                style={styles.icon}
+                onPress={() => {
+                  setSecureText(!secureText);
+                  secureText ? setIcon('eye-off') : setIcon('eye');
+                }}
+              />
+
               <Pressable style={{}}>
                 <Text style={styles.text}>Forgot your Password?</Text>
               </Pressable>
@@ -169,9 +164,9 @@ const styles = StyleSheet.create({
     color: 'white',
     // fontStyle: 'EMprint Semibold',
   },
-  icon:{
-    left:290,
-    bottom:63,
+  icon: {
+    left: 290,
+    bottom: 63,
   },
   textbox: {
     flexDirection: 'row',

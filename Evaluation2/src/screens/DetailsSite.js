@@ -15,7 +15,7 @@ export const DetailsSite = ({navigation}) => {
   const route = useRoute();
   const [siteDetails, setSiteDetails] = useState(route.params.item);
   const [icon, setIcon] = useState('eye');
-  const [secureText, setSecureText] = useState('true');
+  const [secureText, setSecureText] = useState(true);
 
   return (
     <SafeAreaView style={styles.container}>

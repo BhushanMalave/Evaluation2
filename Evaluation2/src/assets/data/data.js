@@ -15,7 +15,6 @@ export const Data = [
     sitePassword: '12345678',
     notes: '',
     icon: Image_Icon[0],
-  
   },
   {
     id: '2',
@@ -26,12 +25,11 @@ export const Data = [
     sitePassword: '12345678',
     notes: '',
     icon: Image_Icon[1],
-   
   },
   {
     id: '3',
     url: 'accounts.twitter.com',
-    siteName:  'Twitter',
+    siteName: 'Twitter',
     folder: 'Social Media',
     userName: 'smrock',
     sitePassword: '12345678',
