@@ -201,7 +201,7 @@ const styles = StyleSheet.create({
   },
   buttonbody: {
     flexDirection: 'row',
-    marginTop: Platform.OS === 'ios' ? -5 : 7,
+    marginTop: Platform.OS === 'ios' ? -5 : -13,
   },
   button1: {
     height: 55,
