@@ -15,7 +15,8 @@ import {useDispatch} from 'react-redux';
 import {useState} from 'react';
 import {useRoute} from '@react-navigation/native';
 import {editSite} from '../redux/Slice';
-import Toast from "react-native-simple-toast";
+import Toast from 'react-native-simple-toast';
+import SelectList from 'react-native-dropdown-select-list';
 
 export const EditSites = ({navigation}) => {
   const editSiteValidationSchema = yup.object().shape({
@@ -31,6 +32,21 @@ export const EditSites = ({navigation}) => {
   const dispatch = useDispatch();
   const [icon, setIcon] = useState('eye');
   const [secureText, setSecureText] = useState(true);
+  const [selected, setSelected] = useState('');
+  const data = [
+    {
+      key: 'Social Media',
+      value: 'Social Media',
+    },
+    {
+      key: 'Shopping Apps',
+      value: 'Shopping Apps',
+    },
+    {
+      key: 'Photo Editing Apps',
+      value: 'Photo Editing Apps',
+    },
+  ];
 
   return (
     <SafeAreaView style={styles.container}>
@@ -56,31 +72,22 @@ export const EditSites = ({navigation}) => {
           sitePassword: siteDetails.sitePassword,
           notes: siteDetails.notes,
         }}
-        onSubmit={ values => {
+        onSubmit={values => {
           console.log(values);
           const obj = {
             id: siteDetails.id,
             url: values.url,
             siteName: values.siteName,
-            folder: values.folder,
+            folder: selected,
             userName: values.userName,
             sitePassword: values.sitePassword,
             notes: values.notes,
           };
           dispatch(editSite(obj));
           navigation.navigate('Site');
-          Toast.show(
-            `Updated Successfully`,
-            Toast.SHORT,
-          );
+          Toast.show(`Updated Successfully`, Toast.SHORT);
         }}>
-        {({
-          handleChange,
-          handleBlur,
-          handleSubmit,
-          values,
-          isValid,
-        }) => (
+        {({handleChange, handleBlur, handleSubmit, values, isValid}) => (
           <>
             <View style={styles.body}>
               <Text style={styles.text}>URL</Text>
@@ -100,12 +107,13 @@ export const EditSites = ({navigation}) => {
                 style={styles.textInput}
               />
               <Text style={styles.text}>Sector/Folder</Text>
-              <TextInput
-                name="folder"
-                onChangeText={handleChange('folder')}
-                onBlur={handleBlur('folder')}
-                value={values.folder}
-                style={styles.textInput}
+              <SelectList
+                data={data}
+                setSelected={setSelected}
+                boxStyles={styles.dropDownBox}
+                inputStyles={styles.dropDropInput}
+                dropdownStyles={styles.dropDown}
+                values={selected}
               />
               <Text style={styles.text}>User Name</Text>
               <TextInput
@@ -123,7 +131,6 @@ export const EditSites = ({navigation}) => {
                 onBlur={handleBlur('sitePassword')}
                 value={values.sitePassword}
                 style={styles.textInput}
-               
               />
               <Icon
                 name={icon}
@@ -198,7 +205,32 @@ const styles = StyleSheet.create({
     borderColor: '#D7D7D7',
     marginTop: 10,
     marginBottom: 10,
-    color:'black',
+    color: 'black',
+  },
+  dropDownBox: {
+    height: 43,
+    width: 350,
+    borderColor: '#D7D7D7',
+    backgroundColor: '#F5F7FB',
+    borderRadius: 4,
+    borderWidth: 1,
+    marginTop: 10,
+    marginBottom: 10,
+  },
+  dropDropInput: {
+    fontSize: 13,
+    fontWeight: '200',
+    color: 'bol',
+  },
+  dropDown: {
+    width: 321,
+    borderColor: '#D7D7D7',
+    backgroundColor: '#F5F7FB',
+    borderRadius: 4,
+    borderWidth: 1,
+    marginHorizontal: 20,
+    marginVertical: 10.5,
+    padding: 10,
   },
   text: {
     height: 24,

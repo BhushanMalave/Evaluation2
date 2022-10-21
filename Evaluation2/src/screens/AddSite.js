@@ -15,20 +15,46 @@ import {useSelector, useDispatch} from 'react-redux';
 import Facebook from '../assets/images/Bitmap.png';
 import Toast from 'react-native-simple-toast';
 import Icon from 'react-native-vector-icons/Feather';
+import SelectList from 'react-native-dropdown-select-list';
 
 const AddSite = ({navigation}) => {
   const addSiteValidationSchema = yup.object().shape({
     url: yup.string().required(),
     siteName: yup.string().required(),
-    folder: yup.string().required(),
     userName: yup.string().required(),
     sitePassword: yup.string().required(),
     notes: yup.string().required(),
   });
+
   const siteData = useSelector(state => state.site.value);
   const dispatch = useDispatch();
   const [icon, setIcon] = useState('eye');
   const [secureText, setSecureText] = useState(true);
+  const [selected, setSelected] = useState('');
+  const data = [
+    {
+      key: 'Social Media',
+      value: 'Social Media',
+    },
+    {
+      key: 'Shopping Apps',
+      value: 'Shopping Apps',
+    },
+    {
+      key: 'Photo Editing Apps',
+      value: 'Photo Editing Apps',
+    },
+  ];
+  const initialValues = {
+    id: siteData.length + 1,
+    url: ' ',
+    siteName: ' ',
+    folder: selected,
+    userName: '',
+    sitePassword: '',
+    notes: '',
+    icon: Facebook,
+  };
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.topbar}>
@@ -46,23 +72,31 @@ const AddSite = ({navigation}) => {
       </View>
       <Formik
         validationSchema={addSiteValidationSchema}
-        initialValues={{
-          id: siteData.length + 1,
-          url: ' ',
-          siteName: ' ',
-          folder: '',
-          userName: '',
-          sitePassword: '',
-          notes: '',
-          icon: Facebook,
-        }}
+        initialValues={initialValues}
         onSubmit={values => {
           console.log(values);
-          dispatch(addSite(values));
+          const obj = {
+            id: values.id,
+            url: values.url,
+            siteName: values.siteName,
+            folder: selected,
+            userName: values.userName,
+            sitePassword: values.sitePassword,
+            notes: values.notes,
+            icon: Facebook,
+          };
+          dispatch(addSite(obj));
           Toast.show(`Saved Successfully`, Toast.SHORT);
           navigation.navigate('Site');
         }}>
-        {({handleChange, handleBlur, handleSubmit, values, isValid}) => (
+        {({
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          resetForm,
+          values,
+          isValid,
+        }) => (
           <>
             <View style={styles.body}>
               <Text style={styles.text}>URL</Text>
@@ -82,13 +116,21 @@ const AddSite = ({navigation}) => {
                 style={styles.textInput}
               />
               <Text style={styles.text}>Sector/Folder</Text>
-              <TextInput
+              <SelectList
+                data={data}
+                setSelected={setSelected}
+                boxStyles={styles.dropDownBox}
+                inputStyles={styles.dropDropInput}
+                dropdownStyles={styles.dropDown}
+                values={selected}
+              />
+              {/* <TextInput
                 name="folder"
                 onChangeText={handleChange('folder')}
                 onBlur={handleBlur('folder')}
                 value={values.folder}
                 style={styles.textInput}
-              />
+              /> */}
               <Text style={styles.text}>User Name</Text>
               <TextInput
                 name="userName"
@@ -128,7 +170,9 @@ const AddSite = ({navigation}) => {
               />
             </View>
             <View style={styles.buttonbody}>
-              <Pressable onPress={() => {}} style={styles.button}>
+              <Pressable
+                onPress={() => resetForm({initialValues})}
+                style={styles.button}>
                 <Text style={styles.buttontext}>Reset</Text>
               </Pressable>
               <Pressable
@@ -182,7 +226,32 @@ const styles = StyleSheet.create({
     borderColor: '#D7D7D7',
     marginTop: 10,
     marginBottom: 10,
-    color:'black',
+    color: 'black',
+  },
+  dropDownBox: {
+    height: 43,
+    width: 350,
+    borderColor: '#D7D7D7',
+    backgroundColor: '#F5F7FB',
+    borderRadius: 4,
+    borderWidth: 1,
+    marginTop: 10,
+    marginBottom: 10,
+  },
+  dropDropInput: {
+    fontSize: 13,
+    fontWeight: '200',
+    color: 'bol',
+  },
+  dropDown: {
+    width: 321,
+    borderColor: '#D7D7D7',
+    backgroundColor: '#F5F7FB',
+    borderRadius: 4,
+    borderWidth: 1,
+    marginHorizontal: 20,
+    marginVertical: 10.5,
+    padding: 10,
   },
   text: {
     height: 24,
