@@ -53,7 +53,7 @@ const SignIn = ({navigation}) => {
                   ) {
                     Toast.show(`Congrats!!! Success `, Toast.SHORT);
                     navigation.navigate('Site Manager');
-                    resetForm({initialValues});
+                    resetForm({initialValues:''});
                   }
                 } else {
                   Toast.show(

@@ -7,6 +7,7 @@ const SearchField = ({onChangeText,onPress,}) => {
       <TextInput
         onChangeText={onChangeText}
         style={styles.text}
+        placeholderTextColor='black'
         placeholder="Type Keywords to search"></TextInput>
       <Icon name="arrow-right" onPress={onPress} size={25} color="#0E85FF" style={styles.icon} />
     </View>
@@ -31,5 +32,6 @@ const styles = StyleSheet.create({
   text: {
     marginLeft: 20,
     width: 300,
+    color:'black',
   },
 });
