@@ -8,7 +8,6 @@ import {
   Pressable,
   View,
   Image,
-  Alert,
 } from 'react-native';
 
 import {Formik} from 'formik';
@@ -40,7 +39,6 @@ const SignIn = ({navigation}) => {
           validationSchema={signinValidationSchema}
           initialValues={{mobileno: '', mpin: ''}}
           onSubmit={async values => {
-            console.log(' json value', values);
             try {
               const jsonValue = await AsyncStorage.getItem(values.mobileno);
 
@@ -56,7 +54,10 @@ const SignIn = ({navigation}) => {
                   navigation.navigate('Site Manager');
                 }
               } else {
-                alert('Enter Correct Mobile Number and MPin');
+                Toast.show(
+                  `Enter Correct Mobile Number and MPin `,
+                  Toast.SHORT,
+                );
               }
             } catch (err) {
               console.log(err);
@@ -151,6 +152,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 3,
     fontSize: 16,
+    color:'black',
   },
   form: {
     marginTop: 30,
@@ -166,7 +168,7 @@ const styles = StyleSheet.create({
   },
   icon: {
     left: 290,
-    bottom: 63,
+    bottom: 53,
   },
   textbox: {
     flexDirection: 'row',

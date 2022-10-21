@@ -19,9 +19,10 @@ const PasswordManagerNav = () => {
         tabBarStyle: {backgroundColor: '#1baaff'},
         tabBarIndicatorStyle: {
           backgroundColor: 'orange',
-          marginLeft: 50,
+          marginLeft: 30,
           width: 100,
           height: 4.5,
+          borderRadius:2,
         },
         tabBarLabelStyle: {color: 'white', fontSize: 20, fontWeight: 'bold'},
       }}>

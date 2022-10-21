@@ -198,6 +198,7 @@ const styles = StyleSheet.create({
     borderColor: '#D7D7D7',
     marginTop: 10,
     marginBottom: 10,
+    color:'black',
   },
   text: {
     height: 24,

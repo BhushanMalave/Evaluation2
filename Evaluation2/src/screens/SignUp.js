@@ -139,6 +139,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 3,
     fontSize: 16,
+    color:'black',
   },
   button: {
     backgroundColor: 'white',
