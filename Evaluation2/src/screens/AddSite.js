@@ -72,114 +72,114 @@ const AddSite = ({navigation}) => {
         <Text style={styles.text2}> Add Site </Text>
       </View>
       <ScrollView>
-      <Formik
-        validationSchema={addSiteValidationSchema}
-        initialValues={initialValues}
-        onSubmit={values => {
-          console.log(values);
-          const obj = {
-            id: values.id,
-            url: values.url,
-            siteName: values.siteName,
-            folder: selected,
-            userName: values.userName,
-            sitePassword: values.sitePassword,
-            notes: values.notes,
-            icon: Facebook,
-          };
-          dispatch(addSite(obj));
-          Toast.show(`Saved Successfully`, Toast.SHORT);
-          navigation.navigate('Site');
-        }}>
-        {({
-          handleChange,
-          handleBlur,
-          handleSubmit,
-          resetForm,
-          values,
-          isValid,
-        }) => (
-          <>
-            <View style={styles.body}>
-              <Text style={styles.text}>URL</Text>
-              <TextInput
-                name="url"
-                onChangeText={handleChange('url')}
-                onBlur={handleBlur('url')}
-                value={values.url}
-                style={styles.textInput}
-              />
-              <Text style={styles.text}>Site Name</Text>
-              <TextInput
-                name="siteName"
-                onChangeText={handleChange('siteName')}
-                onBlur={handleBlur('siteName')}
-                value={values.siteName}
-                style={styles.textInput}
-              />
-              <Text style={styles.text}>Sector/Folder</Text>
-              <SelectList
-                data={data}
-                setSelected={setSelected}
-                boxStyles={styles.dropDownBox}
-                inputStyles={styles.dropDropInput}
-                dropdownStyles={styles.dropDown}
-                values={selected}
-              />
-              <Text style={styles.text}>User Name</Text>
-              <TextInput
-                name="userName"
-                onChangeText={handleChange('userName')}
-                onBlur={handleBlur('userName')}
-                value={values.userName}
-                style={styles.textInput}
-              />
-              <Text style={styles.text}>Site Password</Text>
-              <TextInput
-                name="sitePassword"
-                onChangeText={handleChange('sitePassword')}
-                secureTextEntry={secureText}
-                onBlur={handleBlur('sitePassword')}
-                value={values.sitePassword}
-                style={styles.textInput}
-              />
-              <Icon
-                name={icon}
-                size={20}
-                color="grey"
-                style={styles.iconpassword}
-                onPress={() => {
-                  setSecureText(!secureText);
-                  secureText ? setIcon('eye-off') : setIcon('eye');
-                }}
-              />
-              <Text style={styles.text}>Notes</Text>
-              <TextInput
-                multiline
-                numberOfLines={4}
-                name="notes"
-                onChangeText={handleChange('notes')}
-                onBlur={handleBlur('notes')}
-                value={values.notes}
-                style={styles.textNotes}
-              />
-            </View>
-            <View style={styles.buttonbody}>
-              <Pressable
-                onPress={() => resetForm({initialValues})}
-                style={styles.button}>
-                <Text style={styles.buttontext}>Reset</Text>
-              </Pressable>
-              <Pressable
-                onPress={handleSubmit}
-                disabled={!isValid}
-                style={styles.button1}>
-                <Text style={styles.buttontext}>Save</Text>
-              </Pressable>
-            </View>
-          </>
-        )}
-      </Formik>
+        <Formik
+          validationSchema={addSiteValidationSchema}
+          initialValues={initialValues}
+          onSubmit={values => {
+            console.log(values);
+            const obj = {
+              id: values.id,
+              url: values.url,
+              siteName: values.siteName,
+              folder: selected,
+              userName: values.userName,
+              sitePassword: values.sitePassword,
+              notes: values.notes,
+              icon: Facebook,
+            };
+            dispatch(addSite(obj));
+            Toast.show(`Saved Successfully`, Toast.SHORT);
+            navigation.navigate('Site');
+          }}>
+          {({
+            handleChange,
+            handleBlur,
+            handleSubmit,
+            resetForm,
+            values,
+            isValid,
+          }) => (
+            <>
+              <View style={styles.body}>
+                <Text style={styles.text}>URL</Text>
+                <TextInput
+                  name="url"
+                  onChangeText={handleChange('url')}
+                  onBlur={handleBlur('url')}
+                  value={values.url}
+                  style={styles.textInput}
+                />
+                <Text style={styles.text}>Site Name</Text>
+                <TextInput
+                  name="siteName"
+                  onChangeText={handleChange('siteName')}
+                  onBlur={handleBlur('siteName')}
+                  value={values.siteName}
+                  style={styles.textInput}
+                />
+                <Text style={styles.text}>Sector/Folder</Text>
+                <SelectList
+                  data={data}
+                  setSelected={setSelected}
+                  boxStyles={styles.dropDownBox}
+                  inputStyles={styles.dropDropInput}
+                  dropdownStyles={styles.dropDown}
+                  values={selected}
+                />
+                <Text style={styles.text}>User Name</Text>
+                <TextInput
+                  name="userName"
+                  onChangeText={handleChange('userName')}
+                  onBlur={handleBlur('userName')}
+                  value={values.userName}
+                  style={styles.textInput}
+                />
+                <Text style={styles.text}>Site Password</Text>
+                <TextInput
+                  name="sitePassword"
+                  onChangeText={handleChange('sitePassword')}
+                  secureTextEntry={secureText}
+                  onBlur={handleBlur('sitePassword')}
+                  value={values.sitePassword}
+                  style={styles.textInput}
+                />
+                <Icon
+                  name={icon}
+                  size={20}
+                  color="grey"
+                  style={styles.iconpassword}
+                  onPress={() => {
+                    setSecureText(!secureText);
+                    secureText ? setIcon('eye-off') : setIcon('eye');
+                  }}
+                />
+                <Text style={styles.text}>Notes</Text>
+                <TextInput
+                  multiline
+                  numberOfLines={4}
+                  name="notes"
+                  onChangeText={handleChange('notes')}
+                  onBlur={handleBlur('notes')}
+                  value={values.notes}
+                  style={styles.textNotes}
+                />
+              </View>
+              <View style={styles.buttonbody}>
+                <Pressable
+                  onPress={() => resetForm({initialValues})}
+                  style={styles.button}>
+                  <Text style={styles.buttontext}>Reset</Text>
+                </Pressable>
+                <Pressable
+                  onPress={handleSubmit}
+                  disabled={!isValid}
+                  style={styles.button1}>
+                  <Text style={styles.buttontext}>Save</Text>
+                </Pressable>
+              </View>
+            </>
+          )}
+        </Formik>
       </ScrollView>
     </SafeAreaView>
   );
@@ -188,7 +188,7 @@ const AddSite = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor:'white',
+    backgroundColor: 'white',
   },
   iconpassword: {
     left: 300,
@@ -227,7 +227,7 @@ const styles = StyleSheet.create({
   },
   dropDownBox: {
     height: 43,
-   
+
     borderColor: '#D7D7D7',
     backgroundColor: '#F5F7FB',
     borderRadius: 4,
@@ -265,17 +265,17 @@ const styles = StyleSheet.create({
     borderColor: '#D7D7D7',
     marginTop: 10,
     marginBottom: 10,
-    color:'black',
+    color: 'black',
   },
   buttonbody: {
     flexDirection: 'row',
-    width:'100%',
+    width: '100%',
     marginTop: Platform.OS === 'ios' ? -5 : -13,
-    flex:1,
+    flex: 1,
   },
   button1: {
     height: 55,
-    width:'50%',
+    width: '50%',
     backgroundColor: '#0E85FF',
     marginLeft: 2,
     alignItems: 'center',
@@ -283,7 +283,7 @@ const styles = StyleSheet.create({
   },
   button: {
     height: 55,
-    width:'50%',
+    width: '50%',
     backgroundColor: '#0E85FF',
     alignItems: 'center',
     justifyContent: 'center',

@@ -66,7 +66,18 @@ export const Slice = createSlice({
     },
     deleteSite: (state, action) => {
       state.value = state.value.filter(item => item.id !== action.payload.id);
-      state.filterValue = state.filterValue.filter(item => item.id !== action.payload.id);
+      state.filterValue = state.filterValue.filter(
+        item => item.id !== action.payload.id,
+      );
+    },
+    filterDropDownSite: (state, action) => {
+      if (action.payload == 'All') {
+        state.value = state.filterValue;
+      } else {
+        state.value = state.filterValue.filter(site =>
+          site.folder.toLowerCase().includes(action.payload.toLowerCase()),
+        );
+      }
     },
     editSite: (state, action) => {
       state.value.map(site => {
@@ -83,6 +94,7 @@ export const Slice = createSlice({
   },
 });
 
-export const {addSite, editSite, filterSite,deleteSite} = Slice.actions;
+export const {addSite, editSite, filterSite, deleteSite, filterDropDownSite} =
+  Slice.actions;
 
 export default Slice.reducer;

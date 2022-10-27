@@ -1,14 +1,28 @@
 import React from 'react';
+import Clipboard from '@react-native-clipboard/clipboard';
+import Toast from 'react-native-simple-toast';
 
-import {StyleSheet, Text, Pressable, View, Image, TouchableOpacity} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  Pressable,
+  View,
+  Image,
+  TouchableOpacity,
+} from 'react-native';
 
 export const MainComp = ({
   title = 'Facebook',
   url = 'www.facebook.com',
   uri,
+  password,
   onPress,
   onLongPress,
 }) => {
+  const copyPassword = password => {
+    Clipboard.setString(password);
+    Toast.show(`Password Copied`, Toast.SHORT);
+  };
   return (
     <View style={styles.body}>
       <TouchableOpacity onPress={onPress} onLongPress={onLongPress}>
@@ -16,13 +30,16 @@ export const MainComp = ({
           <Image source={uri ? uri : imgUrl} style={styles.logo} />
           <View style={styles.bodyin}>
             <Text style={styles.text1}>{title}</Text>
-            <Text style={styles.text2}>Copy Password</Text>
+            <TouchableOpacity
+              onPress={() => {
+                copyPassword(password);
+              }}>
+              <Text style={styles.text2}>Copy Password</Text>
+            </TouchableOpacity>
           </View>
         </View>
         <View style={styles.view}>
-          <Pressable>
-            <Text style={styles.text3}>{url}</Text>
-          </Pressable>
+          <Text style={styles.text3}>{url}</Text>
         </View>
       </TouchableOpacity>
     </View>

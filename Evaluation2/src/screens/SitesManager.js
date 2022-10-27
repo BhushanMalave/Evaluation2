@@ -9,26 +9,67 @@ import {
   Image,
   FlatList,
   ScrollView,
+  TouchableOpacity,
 } from 'react-native';
 import {MainComp} from '../assets/components/MainComponent/MainComp';
 import {Button2} from '../assets/components/Button/Buttons';
 
 import {useSelector, useDispatch} from 'react-redux';
+import Modal from 'react-native-modal';
 
 import {useState} from 'react';
 import SearchField from '../assets/components/MainComponent/SearchField';
 import {filterSite} from '../redux/Slice';
 import {deleteSite} from '../redux/Slice';
+import {filterDropDownSite} from '../redux/Slice';
 
 export const SitesManager = ({navigation}) => {
   const [clicked, setClicked] = useState(false);
+  const [visible, setVisible] = useState(false);
   const dispatch = useDispatch();
   const siteData = useSelector(state => state.site.value);
+  const sitesFolder = ['All', 'Social Media', 'Shopping Apps'];
+  const [title, setTitle] = useState('All');
+  const [modalVisiblity, setModalVisiblity] = useState(false);
+
+  const setDropDown = () => {
+    setVisible(!visible);
+  };
+
+  const handleFolders = folder => {
+    setTitle(folder);
+    dispatch(filterDropDownSite(folder));
+    setVisible(false);
+  };
+
+  const renderDropDown = () => {
+    if (visible) {
+      return (
+        <View style={styles.dropdownContainer}>
+          {sitesFolder.map(folder => (
+            <TouchableOpacity
+              onPress={() => {
+                handleFolders(folder);
+              }}
+              key={folder}>
+              <Text style={styles.dropdownText}>{folder}</Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+      );
+    }
+  };
+
+  const handleToggle = () => {
+    setModalVisiblity(!modalVisiblity);
+  };
+
   const renderItem = ({item}) => (
     <MainComp
       title={item.siteName}
       uri={item.icon}
       url={item.url}
+      password={item.sitePassword}
       onPress={() => navigation.navigate('Site Details', {item})}
       onLongPress={() => dispatch(deleteSite(item))}
     />
@@ -54,15 +95,29 @@ export const SitesManager = ({navigation}) => {
               style={styles.image3}
             />
           </Pressable>
-          <Image
-            source={require('../assets/images/sync_icn.png')}
-            style={styles.image4}
-          />
+          <TouchableOpacity onPress={handleToggle}>
+            <Image
+              source={require('../assets/images/sync_icn.png')}
+              style={styles.image4}
+            />
+          </TouchableOpacity>
           <Image
             source={require('../assets/images/profile.png')}
             style={styles.image5}
           />
         </View>
+        <Modal isVisible={modalVisiblity} coverScreen={true}>
+          <TouchableOpacity onPress={handleToggle}>
+            <View style={styles.imageContainer}>
+              <Text style={styles.modalText}>Data Sync in Progress</Text>
+              <Text style={styles.modalText}>Please wait</Text>
+            </View>
+            <Image
+              source={require('../assets/images/AsyncData.png')}
+              style={styles.dataSyncimage}
+            />
+          </TouchableOpacity>
+        </Modal>
       </View>
 
       {clicked ? (
@@ -75,11 +130,11 @@ export const SitesManager = ({navigation}) => {
           <View style={styles.bodytop2}>
             <Text style={styles.text1}>Sites</Text>
             <View style={styles.bodytop2in}>
-              <Text style={styles.text2}>Social Media</Text>
+              <Text style={styles.text2}>{title}</Text>
               <View style={styles.oval}>
                 <Text style={styles.number}>{siteData.length}</Text>
-              </View >
-              <Pressable>
+              </View>
+              <Pressable onPress={setDropDown}>
                 <Image
                   source={require('../assets/images/pathcopy.png')}
                   style={styles.image6}
@@ -88,6 +143,7 @@ export const SitesManager = ({navigation}) => {
             </View>
           </View>
           <View style={styles.bottomborder} />
+          {renderDropDown()}
         </View>
       )}
 
@@ -139,8 +195,8 @@ const styles = StyleSheet.create({
     width: '100%',
     justifyContent: 'space-between',
   },
-  bodytop2in:{
-    flexDirection:'row',
+  bodytop2in: {
+    flexDirection: 'row',
   },
   bottomborder: {
     borderBottomWidth: 4,
@@ -176,13 +232,25 @@ const styles = StyleSheet.create({
     marginLeft: 7,
     marginRight: 10,
   },
+  dropdownContainer: {
+    marginVertical: 10,
+    alignSelf: 'flex-end',
+    marginEnd: 15,
+    borderRadius: 5,
+    borderWidth: 0.2,
+    borderColor: '#0E85FF',
+    backgroundColor: '#FFFFFF',
+  },
+  dropdownText: {
+    padding: 5,
+  },
   text1: {
     height: 55,
     fontSize: 24,
     textAlign: 'left',
     marginLeft: 17,
     marginTop: 10,
-    color:"black",
+    color: 'black',
   },
   text2: {
     height: 27,
@@ -190,7 +258,7 @@ const styles = StyleSheet.create({
     marginTop: 4,
     marginLeft: 120,
     marginTop: 15,
-    color:"black",
+    color: 'black',
   },
   number: {
     height: 22,
@@ -210,5 +278,22 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     marginLeft: 10,
     marginTop: 12,
+  },
+  modalText: {
+    alignSelf: 'center',
+    color: '#FFFFFF',
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+  dataSyncimage: {
+    alignSelf: 'center',
+    height: 40,
+    width: 42,
+  },
+  dataSyncContainer: {
+    justifyContent: 'center',
+  },
+  imageContainer: {
+    marginVertical: 33,
   },
 });
