@@ -264,7 +264,7 @@ const styles = StyleSheet.create({
     marginTop: 4,
     marginLeft: 120,
     marginTop: 15,
-    color: 'black',
+    color: 'black',    
   },
   number: {
     height: 22,

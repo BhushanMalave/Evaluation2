@@ -17,7 +17,7 @@ import {Buttons} from '../assets/components/Button/Buttons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Icon from 'react-native-vector-icons/Feather';
 import Toast from 'react-native-simple-toast';
-import { changeUserState } from '../redux/userStateSlice';
+import {changeUserState} from '../redux/userStateSlice';
 import {useDispatch} from 'react-redux';
 
 const SignIn = ({navigation}) => {
@@ -36,7 +36,7 @@ const SignIn = ({navigation}) => {
 
   const [icon, setIcon] = useState('eye');
   const [secureText, setSecureText] = useState(true);
-  const dispatch =useDispatch();
+  const dispatch = useDispatch();
 
   return (
     <SafeAreaView style={styles.container}>
@@ -100,29 +100,30 @@ const SignIn = ({navigation}) => {
                     {errors.mobileno}
                   </Text>
                 )}
+                <View style={styles.mpinView}>
+                  <TextInput
+                    name="mpin"
+                    placeholder="    MPin"
+                    style={styles.textInput1}
+                    onChangeText={handleChange('mpin')}
+                    placeholderTextColor={'grey'}
+                    onBlur={handleBlur('mpin')}
+                    value={values.mpin}
+                    keyboardType="number-pad"
+                    secureTextEntry={secureText}
+                  />
 
-                <TextInput
-                  name="mpin"
-                  placeholder="    MPin"
-                  style={styles.textInput}
-                  onChangeText={handleChange('mpin')}
-                  placeholderTextColor={'grey'}
-                  onBlur={handleBlur('mpin')}
-                  value={values.mpin}
-                  keyboardType="number-pad"
-                  secureTextEntry={secureText}
-                />
-
-                <Icon
-                  name={icon}
-                  size={25}
-                  color="grey"
-                  style={styles.icon}
-                  onPress={() => {
-                    setSecureText(!secureText);
-                    secureText ? setIcon('eye-off') : setIcon('eye');
-                  }}
-                />
+                  <Icon
+                    name={icon}
+                    size={25}
+                    color="grey"
+                    style={styles.icon}
+                    onPress={() => {
+                      setSecureText(!secureText);
+                      secureText ? setIcon('eye-off') : setIcon('eye');
+                    }}
+                  />
+                </View>
                 {errors.mpin && (
                   <Text style={{fontSize: 10, color: 'red'}}>
                     {errors.mpin}
@@ -173,6 +174,14 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: 'black',
   },
+  textInput1: {
+    width: '80%',
+    backgroundColor: 'white',
+    borderRadius: 3,
+    fontSize: 16,
+    color: 'black',
+    height: 54,
+  },
   form: {
     marginTop: 30,
   },
@@ -185,9 +194,17 @@ const styles = StyleSheet.create({
     color: 'white',
     // fontStyle: 'EMprint Semibold',
   },
+  mpinView: {
+    flexDirection: 'row',
+    backgroundColor: 'white',
+    width: '100%',
+    marginVertical: 10,
+    borderRadius: 3,
+    height: 54,
+  },
   icon: {
-    left: 290,
-    bottom: 53,
+    top: 15,
+    left: 20,
   },
   textbox: {
     flexDirection: 'row',

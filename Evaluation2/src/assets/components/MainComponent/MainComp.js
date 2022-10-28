@@ -53,8 +53,9 @@ const styles = StyleSheet.create({
     marginTop: 10,
     borderRight: 5,
     backgroundColor: '#FFFFFF',
-    shadowOpacity: 0.5,
+    shadowOpacity: 0.7,
     paddingEnd: 15,
+    marginHorizontal:1,
   },
   bodytop: {
     flexDirection: 'row',
@@ -77,6 +78,9 @@ const styles = StyleSheet.create({
   },
   view: {
     backgroundColor: '#FAFAFA',
+    width:"104%",
+    borderRadius: 15,
+    borderRight: 5,
   },
   text2: {
     height: 15,

@@ -21,17 +21,17 @@ export const DetailsSite = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.topbar}>
-        <View  style={styles.topbarin}>
-        <Icon
-          name="arrow-left"
-          size={25}
-          color="white"
-          style={styles.icon}
-          onPress={() => {
-            navigation.navigate('Site', {siteDetails});
-          }}
-        />
-        <Text style={styles.text2}> Site Details</Text>
+        <View style={styles.topbarin}>
+          <Icon
+            name="arrow-left"
+            size={25}
+            color="white"
+            style={styles.icon}
+            onPress={() => {
+              navigation.navigate('Site', {siteDetails});
+            }}
+          />
+          <Text style={styles.text2}> Site Details</Text>
         </View>
         <Pressable
           onPress={() => {
@@ -41,39 +41,41 @@ export const DetailsSite = ({navigation}) => {
         </Pressable>
       </View>
       <ScrollView>
-      <View style={styles.body}>
-        <Text style={styles.text}>URL</Text>
-        <TextInput value={siteDetails.url} style={styles.textInput} />
-        <Text style={styles.text}>Site Name</Text>
-        <TextInput value={siteDetails.siteName} style={styles.textInput} />
-        <Text style={styles.text}>Sector/Folder</Text>
-        <TextInput value={siteDetails.folder} style={styles.textInput} />
-        <Text style={styles.text}>User Name</Text>
-        <TextInput value={siteDetails.userName} style={styles.textInput} />
-        <Text style={styles.text}>Site Password</Text>
-        <TextInput
-          value={siteDetails.sitePassword}
-          secureTextEntry={secureText}
-          style={styles.textInput}
-        />
-        <Icon
-          name={icon}
-          size={20}
-          color="grey"
-          style={styles.iconpassword}
-          onPress={() => {
-            setSecureText(!secureText);
-            secureText ? setIcon('eye-off') : setIcon('eye');
-          }}
-        />
-        <Text style={styles.text}>Notes</Text>
-        <TextInput
-          multiline
-          numberOfLines={4}
-          value={siteDetails.notes}
-          style={styles.textNotes}
-        />
-      </View>
+        <View style={styles.body}>
+          <Text style={styles.text}>URL</Text>
+          <TextInput value={siteDetails.url} style={styles.textInput} />
+          <Text style={styles.text}>Site Name</Text>
+          <TextInput value={siteDetails.siteName} style={styles.textInput} />
+          <Text style={styles.text}>Sector/Folder</Text>
+          <TextInput value={siteDetails.folder} style={styles.textInput} />
+          <Text style={styles.text}>User Name</Text>
+          <TextInput value={siteDetails.userName} style={styles.textInput} />
+          <Text style={styles.text}>Site Password</Text>
+          <View style={styles.vieweye}>
+            <TextInput
+              value={siteDetails.sitePassword}
+              secureTextEntry={secureText}
+              style={styles.textInput1}
+            />
+            <Icon
+              name={icon}
+              size={20}
+              color="grey"
+              style={styles.iconpassword}
+              onPress={() => {
+                setSecureText(!secureText);
+                secureText ? setIcon('eye-off') : setIcon('eye');
+              }}
+            />
+          </View>
+          <Text style={styles.text}>Notes</Text>
+          <TextInput
+            multiline
+            numberOfLines={4}
+            value={siteDetails.notes}
+            style={styles.textNotes}
+          />
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
@@ -82,21 +84,35 @@ export const DetailsSite = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor:'white',
+    backgroundColor: 'white',
   },
   iconpassword: {
-    left: 300,
-    bottom: 40,
+    left: 40,
+    top: 10,
+  },
+  textInput1: {
+    height: 39,
+    width: '80%',
+    backgroundColor: '#F5F7FB',
+    color: 'black',
+  },
+  vieweye: {
+    backgroundColor: '#F5F7FB',
+    height: 41,
+    flexDirection: 'row',
+    borderWidth: 1,
+    borderRadius: 4,
+    borderColor: '#D7D7D7',
+    marginVertical: 10,
   },
   topbar: {
     backgroundColor: '#0E85FF',
     flexDirection: 'row',
-    justifyContent:'space-between',
+    justifyContent: 'space-between',
     height: 60,
   },
-  topbarin:{
-    flexDirection:'row',
-   
+  topbarin: {
+    flexDirection: 'row',
   },
   text1: {
     marginTop: 20,
@@ -106,8 +122,8 @@ const styles = StyleSheet.create({
     height: 28,
     width: 103,
     fontSize: 20,
-    marginLeft:15,
-    marginTop:20,
+    marginLeft: 15,
+    marginTop: 20,
     color: '#FFFFFF',
   },
   text3: {
@@ -130,7 +146,7 @@ const styles = StyleSheet.create({
     borderColor: '#D7D7D7',
     marginTop: 10,
     marginBottom: 10,
-    color:'black',
+    color: 'black',
   },
   text: {
     height: 24,
@@ -147,7 +163,7 @@ const styles = StyleSheet.create({
     borderColor: '#D7D7D7',
     marginTop: 10,
     marginBottom: 10,
-    color:'black',
+    color: 'black',
   },
   icon: {
     marginTop: 20,

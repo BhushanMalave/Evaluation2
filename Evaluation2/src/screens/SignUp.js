@@ -110,27 +110,29 @@ export const SignUp = ({navigation}) => {
                     {errors.mpin}
                   </Text>
                 )}
-                <TextInput
-                  name="confirmmpin"
-                  placeholder="   Re-Enter 4 digit Mpin"
-                  onChangeText={handleChange('conformmpin')}
-                  placeholderTextColor={'grey'}
-                  onBlur={handleBlur('conformmpin')}
-                  value={values.conformmpin}
-                  keyboardType="number-pad"
-                  secureTextEntry={secureText}
-                  style={styles.field}
-                />
-                <Icon
-                  name={icon}
-                  size={25}
-                  color="grey"
-                  style={styles.icon}
-                  onPress={() => {
-                    setSecureText(!secureText);
-                    secureText ? setIcon('eye-off') : setIcon('eye');
-                  }}
-                />
+                <View style={styles.mpinView}>
+                  <TextInput
+                    name="confirmmpin"
+                    placeholder="   Re-Enter 4 digit Mpin"
+                    onChangeText={handleChange('conformmpin')}
+                    placeholderTextColor={'grey'}
+                    onBlur={handleBlur('conformmpin')}
+                    value={values.conformmpin}
+                    keyboardType="number-pad"
+                    secureTextEntry={secureText}
+                    style={styles.field1}
+                  />
+                  <Icon
+                    name={icon}
+                    size={25}
+                    color="grey"
+                    style={styles.icon}
+                    onPress={() => {
+                      setSecureText(!secureText);
+                      secureText ? setIcon('eye-off') : setIcon('eye');
+                    }}
+                  />
+                </View>
                 {errors.conformmpin && (
                   <Text style={{fontSize: 10, color: 'red'}}>
                     {errors.conformmpin}
@@ -168,6 +170,14 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: 'black',
   },
+  field1: {
+    width: '80%',
+    backgroundColor: 'white',
+    borderRadius: 3,
+    fontSize: 16,
+    color: 'black',
+    height: 54,
+  },
   button: {
     backgroundColor: 'white',
     width: 130,
@@ -180,6 +190,14 @@ const styles = StyleSheet.create({
   form: {
     marginTop: 30,
   },
+  mpinView: {
+    flexDirection: 'row',
+    backgroundColor: 'white',
+    width: '100%',
+    marginVertical: 10,
+    borderRadius: 3,
+    height: 54,
+  },
   buttonText: {
     fontSize: 18,
     // fontStyle: 'OpenSans Semibold',
@@ -187,7 +205,7 @@ const styles = StyleSheet.create({
     color: '#0E85FF',
   },
   icon: {
-    left: 290,
-    bottom: 53,
+    top: 15,
+    left: 20,
   },
 });

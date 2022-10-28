@@ -43,10 +43,7 @@ export const EditSites = ({navigation}) => {
       key: 'Shopping Apps',
       value: 'Shopping Apps',
     },
-    {
-      key: 'Photo Editing Apps',
-      value: 'Photo Editing Apps',
-    },
+    
   ];
 
   return (
@@ -63,33 +60,34 @@ export const EditSites = ({navigation}) => {
         />
         <Text style={styles.text2}> Edit </Text>
       </View>
-      <ScrollView>
-        <Formik
-          validationSchema={editSiteValidationSchema}
-          initialValues={{
-            url: siteDetails.url,
-            siteName: siteDetails.siteName,
-            folder: siteDetails.folder,
-            userName: siteDetails.userName,
-            sitePassword: siteDetails.sitePassword,
-            notes: siteDetails.notes,
-          }}
-          onSubmit={values => {
-            const obj = {
-              id: siteDetails.id,
-              url: values.url,
-              siteName: values.siteName,
-              folder: selected,
-              userName: values.userName,
-              sitePassword: values.sitePassword,
-              notes: values.notes,
-            };
-            dispatch(editSite(obj));
-            navigation.navigate('Site');
-            Toast.show(`Updated Successfully`, Toast.SHORT);
-          }}>
-          {({handleChange, handleBlur, handleSubmit, values, isValid}) => (
-            <>
+
+      <Formik
+        validationSchema={editSiteValidationSchema}
+        initialValues={{
+          url: siteDetails.url,
+          siteName: siteDetails.siteName,
+          folder: siteDetails.folder,
+          userName: siteDetails.userName,
+          sitePassword: siteDetails.sitePassword,
+          notes: siteDetails.notes,
+        }}
+        onSubmit={values => {
+          const obj = {
+            id: siteDetails.id,
+            url: values.url,
+            siteName: values.siteName,
+            folder: selected,
+            userName: values.userName,
+            sitePassword: values.sitePassword,
+            notes: values.notes,
+          };
+          dispatch(editSite(obj));
+          navigation.navigate('Site');
+          Toast.show(`Updated Successfully`, Toast.SHORT);
+        }}>
+        {({handleChange, handleBlur, handleSubmit, values, isValid}) => (
+          <>
+            <ScrollView>
               <View style={styles.body}>
                 <Text style={styles.text}>URL</Text>
                 <TextInput
@@ -125,24 +123,26 @@ export const EditSites = ({navigation}) => {
                   style={styles.textInput}
                 />
                 <Text style={styles.text}>Site Password</Text>
-                <TextInput
-                  name="sitePassword"
-                  onChangeText={handleChange('sitePassword')}
-                  secureTextEntry={secureText}
-                  onBlur={handleBlur('sitePassword')}
-                  value={values.sitePassword}
-                  style={styles.textInput}
-                />
-                <Icon
-                  name={icon}
-                  size={20}
-                  color="grey"
-                  style={styles.iconpassword}
-                  onPress={() => {
-                    setSecureText(!secureText);
-                    secureText ? setIcon('eye-off') : setIcon('eye');
-                  }}
-                />
+                <View style={styles.vieweye}>
+                  <TextInput
+                    name="sitePassword"
+                    onChangeText={handleChange('sitePassword')}
+                    secureTextEntry={secureText}
+                    onBlur={handleBlur('sitePassword')}
+                    value={values.sitePassword}
+                    style={styles.textInput1}
+                  />
+                  <Icon
+                    name={icon}
+                    size={20}
+                    color="grey"
+                    style={styles.iconpassword}
+                    onPress={() => {
+                      setSecureText(!secureText);
+                      secureText ? setIcon('eye-off') : setIcon('eye');
+                    }}
+                  />
+                </View>
                 <Text style={styles.text}>Notes</Text>
                 <TextInput
                   multiline
@@ -154,18 +154,18 @@ export const EditSites = ({navigation}) => {
                   style={styles.textNotes}
                 />
               </View>
-              <View style={styles.buttonbody}>
-                <Pressable
-                  onPress={handleSubmit}
-                  disabled={!isValid}
-                  style={styles.button}>
-                  <Text style={styles.buttontext}>Update</Text>
-                </Pressable>
-              </View>
-            </>
-          )}
-        </Formik>
-      </ScrollView>
+            </ScrollView>
+            <View style={styles.buttonbody}>
+              <Pressable
+                onPress={handleSubmit}
+                disabled={!isValid}
+                style={styles.button}>
+                <Text style={styles.buttontext}>Update</Text>
+              </Pressable>
+            </View>
+          </>
+        )}
+      </Formik>
     </SafeAreaView>
   );
 };
@@ -181,8 +181,23 @@ const styles = StyleSheet.create({
     height: 60,
   },
   iconpassword: {
-    left: 300,
-    bottom: 40,
+    left: 40,
+    top: 10,
+  },
+  textInput1: {
+    height: 39,
+    width: '80%',
+    backgroundColor: '#F5F7FB',
+    color: 'black',
+  },
+  vieweye: {
+    backgroundColor: '#F5F7FB',
+    height: 41,
+    flexDirection: 'row',
+    borderWidth: 1,
+    borderRadius: 4,
+    borderColor: '#D7D7D7',
+    marginVertical: 10,
   },
   text1: {
     marginTop: 20,
@@ -258,7 +273,7 @@ const styles = StyleSheet.create({
     marginLeft: 5,
   },
   buttonbody: {
-    marginTop: Platform.OS === 'ios' ? 0 : 7,
+    
   },
   button: {
     height: 55,
