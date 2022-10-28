@@ -8,7 +8,6 @@ import {
   Pressable,
   Image,
   FlatList,
-  ScrollView,
   TouchableOpacity,
 } from 'react-native';
 import {MainComp} from '../assets/components/MainComponent/MainComp';
@@ -22,6 +21,7 @@ import SearchField from '../assets/components/MainComponent/SearchField';
 import {filterSite} from '../redux/Slice';
 import {deleteSite} from '../redux/Slice';
 import {filterDropDownSite} from '../redux/Slice';
+import { changeUserState } from '../redux/userStateSlice';
 
 export const SitesManager = ({navigation}) => {
   const [clicked, setClicked] = useState(false);
@@ -31,6 +31,7 @@ export const SitesManager = ({navigation}) => {
   const sitesFolder = ['All', 'Social Media', 'Shopping Apps'];
   const [title, setTitle] = useState('All');
   const [modalVisiblity, setModalVisiblity] = useState(false);
+
 
   const setDropDown = () => {
     setVisible(!visible);
@@ -63,6 +64,9 @@ export const SitesManager = ({navigation}) => {
   const handleToggle = () => {
     setModalVisiblity(!modalVisiblity);
   };
+  const changeState = () => {
+         dispatch(changeUserState())
+  }
 
   const renderItem = ({item}) => (
     <MainComp
@@ -100,11 +104,13 @@ export const SitesManager = ({navigation}) => {
               source={require('../assets/images/sync_icn.png')}
               style={styles.image4}
             />
-          </TouchableOpacity>
+          </TouchableOpacity >
+          <TouchableOpacity onPress={changeState}>
           <Image
             source={require('../assets/images/profile.png')}
             style={styles.image5}
           />
+          </TouchableOpacity>
         </View>
         <Modal isVisible={modalVisiblity} coverScreen={true}>
           <TouchableOpacity onPress={handleToggle}>

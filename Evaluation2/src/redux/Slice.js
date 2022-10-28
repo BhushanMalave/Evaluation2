@@ -5,6 +5,8 @@ import Youtube from '../assets/images/youtube.png';
 import Instagram from '../assets/images/instagram.png';
 const Image_Icon = [Facebook, Youtube, Twitter, Instagram];
 
+const User = [];
+
 const initialState = [
   {
     id: '1',
@@ -55,6 +57,14 @@ export const Slice = createSlice({
     filterValue: initialState,
   },
   reducers: {
+    // addUser: (state,action) =>{
+    //   // state.value.user.push(action.payload);
+    //   // state.filterValue.user.push(action.payload);
+    //   // console.log(value);
+    //   // console.log(filterValue);
+    //   console.log('aaaa')
+
+    // },
     addSite: (state, action) => {
       state.value.push(action.payload);
       state.filterValue.push(action.payload);
@@ -90,11 +100,27 @@ export const Slice = createSlice({
           site.notes = action.payload.notes;
         }
       });
+      state.filterValue.map(site => {
+        if (site.id === action.payload.id) {
+          site.url = action.payload.url;
+          site.siteName = action.payload.siteName;
+          site.folder = action.payload.folder;
+          site.userName = action.payload.userName;
+          site.sitePassword = action.payload.sitePassword;
+          site.notes = action.payload.notes;
+        }
+      });
     },
   },
 });
 
-export const {addSite, editSite, filterSite, deleteSite, filterDropDownSite} =
-  Slice.actions;
+export const {
+  addSite,
+  editSite,
+  filterSite,
+  deleteSite,
+  filterDropDownSite,
+  addUser,
+} = Slice.actions;
 
 export default Slice.reducer;

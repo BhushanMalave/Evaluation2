@@ -17,12 +17,15 @@ import {Buttons} from '../assets/components/Button/Buttons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Icon from 'react-native-vector-icons/Feather';
 import Toast from 'react-native-simple-toast';
+import { changeUserState } from '../redux/userStateSlice';
+import {useDispatch} from 'react-redux';
 
 const SignIn = ({navigation}) => {
   const signinValidationSchema = yup.object().shape({
     mobileno: yup
       .string()
       .matches(/(\d){10}\b/, 'Enter a valid mobile number')
+      .max(10, ({max}) => `mobile number must be${max} of characters`)
       .required('Phone number is required'),
     mpin: yup
       .string()
@@ -33,6 +36,8 @@ const SignIn = ({navigation}) => {
 
   const [icon, setIcon] = useState('eye');
   const [secureText, setSecureText] = useState(true);
+  const dispatch =useDispatch();
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.form}>
@@ -52,12 +57,18 @@ const SignIn = ({navigation}) => {
                     values.mpin === parseValue.mpin
                   ) {
                     Toast.show(`Congrats!!! Success `, Toast.SHORT);
-                    navigation.navigate('Site Manager');
-                    resetForm({initialValues:''});
+                    dispatch(changeUserState());
+                    // navigation.navigate('Site Manager');
+                    resetForm({initialValues: ''});
+                  } else {
+                    Toast.show(
+                      `Enter Correct Mobile Number and MPin `,
+                      Toast.SHORT,
+                    );
                   }
                 } else {
                   Toast.show(
-                    `Enter Correct Mobile Number and MPin `,
+                    `User dont have account \n       Please SignUp`,
                     Toast.SHORT,
                   );
                 }
@@ -101,11 +112,7 @@ const SignIn = ({navigation}) => {
                   keyboardType="number-pad"
                   secureTextEntry={secureText}
                 />
-                {errors.mpin && (
-                  <Text style={{fontSize: 10, color: 'red'}}>
-                    {errors.mpin}
-                  </Text>
-                )}
+
                 <Icon
                   name={icon}
                   size={25}
@@ -116,6 +123,11 @@ const SignIn = ({navigation}) => {
                     secureText ? setIcon('eye-off') : setIcon('eye');
                   }}
                 />
+                {errors.mpin && (
+                  <Text style={{fontSize: 10, color: 'red'}}>
+                    {errors.mpin}
+                  </Text>
+                )}
 
                 <Pressable style={{}}>
                   <Text style={styles.text}>Forgot your Password?</Text>

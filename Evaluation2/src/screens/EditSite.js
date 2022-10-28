@@ -33,7 +33,7 @@ export const EditSites = ({navigation}) => {
   const dispatch = useDispatch();
   const [icon, setIcon] = useState('eye');
   const [secureText, setSecureText] = useState(true);
-  const [selected, setSelected] = useState('');
+  const [selected, setSelected] = useState(route.params.siteDetails.folder);
   const data = [
     {
       key: 'Social Media',
@@ -64,108 +64,107 @@ export const EditSites = ({navigation}) => {
         <Text style={styles.text2}> Edit </Text>
       </View>
       <ScrollView>
-      <Formik
-        validationSchema={editSiteValidationSchema}
-        initialValues={{
-          url: siteDetails.url,
-          siteName: siteDetails.siteName,
-          folder: siteDetails.folder,
-          userName: siteDetails.userName,
-          sitePassword: siteDetails.sitePassword,
-          notes: siteDetails.notes,
-        }}
-        onSubmit={values => {
-          console.log(values);
-          const obj = {
-            id: siteDetails.id,
-            url: values.url,
-            siteName: values.siteName,
-            folder: selected,
-            userName: values.userName,
-            sitePassword: values.sitePassword,
-            notes: values.notes,
-          };
-          dispatch(editSite(obj));
-          navigation.navigate('Site');
-          Toast.show(`Updated Successfully`, Toast.SHORT);
-        }}>
-        {({handleChange, handleBlur, handleSubmit, values, isValid}) => (
-          <>
-            <View style={styles.body}>
-              <Text style={styles.text}>URL</Text>
-              <TextInput
-                name="url"
-                onChangeText={handleChange('url')}
-                onBlur={handleBlur('url')}
-                value={values.url}
-                style={styles.textInput}
-              />
-              <Text style={styles.text}>Site Name</Text>
-              <TextInput
-                name="siteName"
-                onChangeText={handleChange('siteName')}
-                onBlur={handleBlur('siteName')}
-                value={values.siteName}
-                style={styles.textInput}
-              />
-              <Text style={styles.text}>Sector/Folder</Text>
-              <SelectList
-                data={data}
-                setSelected={setSelected}
-                boxStyles={styles.dropDownBox}
-                inputStyles={styles.dropDropInput}
-                dropdownStyles={styles.dropDown}
-                values={selected}
-              />
-              <Text style={styles.text}>User Name</Text>
-              <TextInput
-                name="userName"
-                onChangeText={handleChange('userName')}
-                onBlur={handleBlur('userName')}
-                value={values.userName}
-                style={styles.textInput}
-              />
-              <Text style={styles.text}>Site Password</Text>
-              <TextInput
-                name="sitePassword"
-                onChangeText={handleChange('sitePassword')}
-                secureTextEntry={secureText}
-                onBlur={handleBlur('sitePassword')}
-                value={values.sitePassword}
-                style={styles.textInput}
-              />
-              <Icon
-                name={icon}
-                size={20}
-                color="grey"
-                style={styles.iconpassword}
-                onPress={() => {
-                  setSecureText(!secureText);
-                  secureText ? setIcon('eye-off') : setIcon('eye');
-                }}
-              />
-              <Text style={styles.text}>Notes</Text>
-              <TextInput
-                multiline
-                numberOfLines={4}
-                name="notes"
-                onChangeText={handleChange('notes')}
-                onBlur={handleBlur('notes')}
-                value={values.notes}
-                style={styles.textNotes}
-              />
-            </View>
-            <View style={styles.buttonbody}>
-              <Pressable
-                onPress={handleSubmit}
-                disabled={!isValid}
-                style={styles.button}>
-                <Text style={styles.buttontext}>Update</Text>
-              </Pressable>
-            </View>
-          </>
-        )}
-      </Formik>
+        <Formik
+          validationSchema={editSiteValidationSchema}
+          initialValues={{
+            url: siteDetails.url,
+            siteName: siteDetails.siteName,
+            folder: siteDetails.folder,
+            userName: siteDetails.userName,
+            sitePassword: siteDetails.sitePassword,
+            notes: siteDetails.notes,
+          }}
+          onSubmit={values => {
+            const obj = {
+              id: siteDetails.id,
+              url: values.url,
+              siteName: values.siteName,
+              folder: selected,
+              userName: values.userName,
+              sitePassword: values.sitePassword,
+              notes: values.notes,
+            };
+            dispatch(editSite(obj));
+            navigation.navigate('Site');
+            Toast.show(`Updated Successfully`, Toast.SHORT);
+          }}>
+          {({handleChange, handleBlur, handleSubmit, values, isValid}) => (
+            <>
+              <View style={styles.body}>
+                <Text style={styles.text}>URL</Text>
+                <TextInput
+                  name="url"
+                  onChangeText={handleChange('url')}
+                  onBlur={handleBlur('url')}
+                  value={values.url}
+                  style={styles.textInput}
+                />
+                <Text style={styles.text}>Site Name</Text>
+                <TextInput
+                  name="siteName"
+                  onChangeText={handleChange('siteName')}
+                  onBlur={handleBlur('siteName')}
+                  value={values.siteName}
+                  style={styles.textInput}
+                />
+                <Text style={styles.text}>Sector/Folder</Text>
+                <SelectList
+                  data={data}
+                  setSelected={setSelected}
+                  boxStyles={styles.dropDownBox}
+                  inputStyles={styles.dropDropInput}
+                  dropdownStyles={styles.dropDown}
+                  values={selected}
+                />
+                <Text style={styles.text}>User Name</Text>
+                <TextInput
+                  name="userName"
+                  onChangeText={handleChange('userName')}
+                  onBlur={handleBlur('userName')}
+                  value={values.userName}
+                  style={styles.textInput}
+                />
+                <Text style={styles.text}>Site Password</Text>
+                <TextInput
+                  name="sitePassword"
+                  onChangeText={handleChange('sitePassword')}
+                  secureTextEntry={secureText}
+                  onBlur={handleBlur('sitePassword')}
+                  value={values.sitePassword}
+                  style={styles.textInput}
+                />
+                <Icon
+                  name={icon}
+                  size={20}
+                  color="grey"
+                  style={styles.iconpassword}
+                  onPress={() => {
+                    setSecureText(!secureText);
+                    secureText ? setIcon('eye-off') : setIcon('eye');
+                  }}
+                />
+                <Text style={styles.text}>Notes</Text>
+                <TextInput
+                  multiline
+                  numberOfLines={4}
+                  name="notes"
+                  onChangeText={handleChange('notes')}
+                  onBlur={handleBlur('notes')}
+                  value={values.notes}
+                  style={styles.textNotes}
+                />
+              </View>
+              <View style={styles.buttonbody}>
+                <Pressable
+                  onPress={handleSubmit}
+                  disabled={!isValid}
+                  style={styles.button}>
+                  <Text style={styles.buttontext}>Update</Text>
+                </Pressable>
+              </View>
+            </>
+          )}
+        </Formik>
       </ScrollView>
     </SafeAreaView>
   );
@@ -174,7 +173,7 @@ export const EditSites = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor:'white',
+    backgroundColor: 'white',
   },
   topbar: {
     backgroundColor: '#0E85FF',
@@ -224,7 +223,7 @@ const styles = StyleSheet.create({
   dropDropInput: {
     fontSize: 13,
     fontWeight: '200',
-    textDecorationColor:'black',
+    textDecorationColor: 'black',
   },
   dropDown: {
     width: 321,
@@ -252,7 +251,7 @@ const styles = StyleSheet.create({
     borderColor: '#D7D7D7',
     marginTop: 10,
     marginBottom: 10,
-    color:'black',
+    color: 'black',
   },
   icon: {
     marginTop: 20,

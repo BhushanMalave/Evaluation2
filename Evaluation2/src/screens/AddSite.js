@@ -76,7 +76,6 @@ const AddSite = ({navigation}) => {
           validationSchema={addSiteValidationSchema}
           initialValues={initialValues}
           onSubmit={values => {
-            console.log(values);
             const obj = {
               id: values.id,
               url: values.url,
