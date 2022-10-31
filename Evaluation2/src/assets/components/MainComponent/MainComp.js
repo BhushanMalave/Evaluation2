@@ -5,7 +5,6 @@ import Toast from 'react-native-simple-toast';
 import {
   StyleSheet,
   Text,
-  Pressable,
   View,
   Image,
   TouchableOpacity,
@@ -53,7 +52,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     borderRight: 5,
     backgroundColor: '#FFFFFF',
-    shadowOpacity: 0.7,
+    shadowOpacity: 0.1,
     paddingEnd: 15,
     marginHorizontal:1,
   },
@@ -63,18 +62,19 @@ const styles = StyleSheet.create({
   },
   logo: {
     marginTop: 10,
-    marginLeft: 5,
+    marginLeft: 20,
   },
   bodyin: {
     marginVertical: 10,
   },
   text1: {
     height: 24,
-    width: 100,
+    width: '100%',
     color: '#0E85FF',
     fontSize: 18,
     lineheight: 24,
     marginTop: 8,
+    textAlign:'right',
   },
   view: {
     backgroundColor: '#FAFAFA',
@@ -84,10 +84,11 @@ const styles = StyleSheet.create({
   },
   text2: {
     height: 15,
-    weight: 81,
+    widht: 81,
     color: '#0E85FF',
     fontSize: 12,
     marginTop: 8,
+    textAlign:'right',
   },
   text3: {
     fontSize: 15,

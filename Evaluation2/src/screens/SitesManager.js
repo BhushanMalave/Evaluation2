@@ -223,15 +223,15 @@ const styles = StyleSheet.create({
   },
   image4: {
     marginTop: 15,
-    marginLeft: 20,
+    marginLeft: 30,
   },
   image3: {
     marginTop: 15,
   },
   image5: {
     marginTop: 15,
-    marginLeft: 20,
-    marginRight: 10,
+    marginLeft: 30,
+    marginRight: 15,
   },
   image6: {
     marginTop: 22,
