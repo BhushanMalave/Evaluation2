@@ -227,15 +227,15 @@ const styles = StyleSheet.create({
     borderColor: '#D7D7D7',
     marginTop: 10,
     marginBottom: 10,
-    color: 'black',
+    color: '#3C4858',
+    paddingLeft:25,
   },
   textInput1: {
     height: 39,
     width: '80%',
-
     backgroundColor: '#F5F7FB',
-
-    color: 'black',
+    paddingLeft:25,
+    color: '#3C4858',
   },
   vieweye: {
     backgroundColor: '#F5F7FB',
@@ -248,13 +248,13 @@ const styles = StyleSheet.create({
   },
   dropDownBox: {
     height: 43,
-
     borderColor: '#D7D7D7',
     backgroundColor: '#F5F7FB',
     borderRadius: 4,
     borderWidth: 1,
     marginTop: 10,
     marginBottom: 10,
+    color: '#3C4858',
   },
   dropDropInput: {
     fontSize: 13,
@@ -286,7 +286,7 @@ const styles = StyleSheet.create({
     borderColor: '#D7D7D7',
     marginTop: 10,
     marginBottom: 10,
-    color: 'black',
+    color: '#3C4858',
   },
   buttonbody: {
     flexDirection: 'row',

@@ -94,7 +94,8 @@ const styles = StyleSheet.create({
     height: 39,
     width: '80%',
     backgroundColor: '#F5F7FB',
-    color: 'black',
+    color: '#3C4858',
+    paddingLeft:25,
   },
   vieweye: {
     backgroundColor: '#F5F7FB',
@@ -146,7 +147,8 @@ const styles = StyleSheet.create({
     borderColor: '#D7D7D7',
     marginTop: 10,
     marginBottom: 10,
-    color: 'black',
+    color: '#3C4858',
+    paddingLeft:25,
   },
   text: {
     height: 24,
@@ -163,7 +165,9 @@ const styles = StyleSheet.create({
     borderColor: '#D7D7D7',
     marginTop: 10,
     marginBottom: 10,
-    color: 'black',
+    color: '#3C4858',
+    paddingLeft:25,
+    paddingTop:10,
   },
   icon: {
     marginTop: 20,

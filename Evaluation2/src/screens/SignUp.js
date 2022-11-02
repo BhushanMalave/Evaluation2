@@ -54,7 +54,6 @@ export const SignUp = ({navigation}) => {
                 mpin: values.mpin,
                 userId: userCount,
               };
-              console.log(obj);
               try {
                 const jsonValue = JSON.stringify(obj);
                 await AsyncStorage.setItem(obj.mobileno, jsonValue);
@@ -167,15 +166,17 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 3,
     fontSize: 16,
-    color: 'black',
+    color: '#3C4858',
+    paddingLeft:25,
   },
   field1: {
     width: '80%',
     backgroundColor: 'white',
     borderRadius: 3,
     fontSize: 16,
-    color: 'black',
+    color: '#3C4858',
     height: 54,
+    paddingLeft:25,
   },
   button: {
     backgroundColor: 'white',

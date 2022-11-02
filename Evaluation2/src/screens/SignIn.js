@@ -49,7 +49,6 @@ const SignIn = ({navigation}) => {
             onSubmit={async (values, {resetForm}) => {
               try {
                 const jsonValue = await AsyncStorage.getItem(values.mobileno);
-                console.log(jsonValue);
                 if (jsonValue != null) {
                   parseValue = JSON.parse(jsonValue);
                   dispatch(assignUserId(parseValue));
@@ -172,15 +171,17 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 3,
     fontSize: 16,
-    color: 'black',
+    color: '#3C4858',
+    paddingLeft:20,
   },
   textInput1: {
     width: '80%',
     backgroundColor: 'white',
     borderRadius: 3,
     fontSize: 16,
-    color: 'black',
+    color: '#3C4858',
     height: 54,
+    paddingLeft:25,
   },
   form: {
     marginTop: 30,
