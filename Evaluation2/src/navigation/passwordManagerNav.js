@@ -23,6 +23,7 @@ const PasswordManagerNav = () => {
           backgroundColor: 'orange',
           height: 4.5,
           borderRadius: 2,
+          justifyContent:'center',
         },
         tabBarLabelStyle: {color: 'white', fontSize: 20, fontWeight: 'bold'},
       }}>

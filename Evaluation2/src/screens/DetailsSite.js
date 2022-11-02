@@ -132,8 +132,9 @@ const styles = StyleSheet.create({
     width: 103,
     fontSize: 20,
     marginTop: 20,
-    marginLeft: 170,
+   marginRight:23,
     color: '#FFFFFF',
+    textAlign:'right',
   },
   body: {
     margin: 20,

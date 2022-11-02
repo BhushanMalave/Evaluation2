@@ -14,7 +14,6 @@ import {Buttons} from '../assets/components/Button/Buttons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Icon from 'react-native-vector-icons/Feather';
 import Toast from 'react-native-simple-toast';
-import uuid from 'react-native-uuid';
 import {useDispatch, useSelector} from 'react-redux';
 import {incrementUserCount} from '../redux/userCountSlice';
 
