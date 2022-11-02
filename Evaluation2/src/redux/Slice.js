@@ -131,9 +131,6 @@ export const Slice = createSlice({
       state.allValues = state.allValues.filter(
         item => item.id !== action.payload.id,
       );
-      state.filterValue = state.filterValue.filter(
-        item => item.id !== action.payload.id,
-      );
     },
     filterDropDownSite: (state, action) => {
       if (action.payload == 'All') {
@@ -156,6 +153,16 @@ export const Slice = createSlice({
         }
       });
       state.filterValue.map(site => {
+        if (site.id === action.payload.id) {
+          site.url = action.payload.url;
+          site.siteName = action.payload.siteName;
+          site.folder = action.payload.folder;
+          site.userName = action.payload.userName;
+          site.sitePassword = action.payload.sitePassword;
+          site.notes = action.payload.notes;
+        }
+      });
+      state.allValues.map(site => {
         if (site.id === action.payload.id) {
           site.url = action.payload.url;
           site.siteName = action.payload.siteName;
