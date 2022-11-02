@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 
 import {
   SafeAreaView,
@@ -18,20 +18,20 @@ import Modal from 'react-native-modal';
 
 import {useState} from 'react';
 import SearchField from '../assets/components/MainComponent/SearchField';
-import {filterSite} from '../redux/Slice';
+import {filterSite, getUserData} from '../redux/Slice';
 import {deleteSite} from '../redux/Slice';
 import {filterDropDownSite} from '../redux/Slice';
-import { changeUserState } from '../redux/userStateSlice';
+import {changeUserState} from '../redux/userStateSlice';
 
 export const SitesManager = ({navigation}) => {
   const [clicked, setClicked] = useState(false);
   const [visible, setVisible] = useState(false);
   const dispatch = useDispatch();
+  const userId = useSelector(state => state.userId.userId);
   const siteData = useSelector(state => state.site.value);
   const sitesFolder = ['All', 'Social Media', 'Shopping Apps'];
   const [title, setTitle] = useState('All');
   const [modalVisiblity, setModalVisiblity] = useState(false);
-
 
   const setDropDown = () => {
     setVisible(!visible);
@@ -65,8 +65,8 @@ export const SitesManager = ({navigation}) => {
     setModalVisiblity(!modalVisiblity);
   };
   const changeState = () => {
-         dispatch(changeUserState())
-  }
+    dispatch(changeUserState());
+  };
 
   const renderItem = ({item}) => (
     <MainComp
@@ -78,6 +78,10 @@ export const SitesManager = ({navigation}) => {
       onLongPress={() => dispatch(deleteSite(item))}
     />
   );
+
+  useEffect(() => {
+    dispatch(getUserData(userId));
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -104,12 +108,12 @@ export const SitesManager = ({navigation}) => {
               source={require('../assets/images/sync_icn.png')}
               style={styles.image4}
             />
-          </TouchableOpacity >
+          </TouchableOpacity>
           <TouchableOpacity onPress={changeState}>
-          <Image
-            source={require('../assets/images/profile.png')}
-            style={styles.image5}
-          />
+            <Image
+              source={require('../assets/images/profile.png')}
+              style={styles.image5}
+            />
           </TouchableOpacity>
         </View>
         <Modal isVisible={modalVisiblity} coverScreen={true}>
@@ -249,6 +253,7 @@ const styles = StyleSheet.create({
   },
   dropdownText: {
     padding: 5,
+    color: 'black',
   },
   text1: {
     height: 55,
@@ -264,7 +269,7 @@ const styles = StyleSheet.create({
     marginTop: 4,
     marginLeft: 120,
     marginTop: 15,
-    color: 'black',    
+    color: 'black',
   },
   number: {
     height: 22,

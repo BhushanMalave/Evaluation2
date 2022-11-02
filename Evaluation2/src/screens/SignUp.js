@@ -14,8 +14,9 @@ import {Buttons} from '../assets/components/Button/Buttons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Icon from 'react-native-vector-icons/Feather';
 import Toast from 'react-native-simple-toast';
-import {useDispatch} from 'react-redux';
-import {addUser} from '../redux/Slice';
+import uuid from 'react-native-uuid';
+import {useDispatch, useSelector} from 'react-redux';
+import {incrementUserCount} from '../redux/userCountSlice';
 
 export const SignUp = ({navigation}) => {
   const signupValidationSchema = yup.object().shape({
@@ -38,6 +39,7 @@ export const SignUp = ({navigation}) => {
   const [icon, setIcon] = useState('eye');
   const [secureText, setSecureText] = useState(true);
   const dispatch = useDispatch();
+  const userCount = useSelector(state => state.userCount.value);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -47,23 +49,21 @@ export const SignUp = ({navigation}) => {
             validationSchema={signupValidationSchema}
             initialValues={{mobileno: '', mpin: '', conformmpin: ''}}
             onSubmit={async (values, {resetForm}) => {
-              // const obj = {
-              //   mobileno:values.mobileno,
-              //   mpin:values.mpin,
-              // }
-              // dispatch(addUser(obj))
-              // Toast.show(
-              //       `Congrats!!! Success \n Signin to access the vault`,
-              //       Toast.SHORT,
-              //     );
+              const obj = {
+                mobileno: values.mobileno,
+                mpin: values.mpin,
+                userId: userCount,
+              };
+              console.log(obj);
               try {
-                const jsonValue = JSON.stringify(values);
-                await AsyncStorage.setItem(values.mobileno, jsonValue);
+                const jsonValue = JSON.stringify(obj);
+                await AsyncStorage.setItem(obj.mobileno, jsonValue);
                 Toast.show(
                   `Congrats!!! Success \n Signin to access the vault`,
                   Toast.SHORT,
                 );
                 navigation.navigate('SIGN IN');
+                dispatch(incrementUserCount());
                 resetForm({initialValues: ''});
               } catch (err) {
                 console.log(err);
@@ -73,7 +73,6 @@ export const SignUp = ({navigation}) => {
               handleChange,
               handleBlur,
               handleSubmit,
-              resetForm,
               values,
               errors,
               isValid,

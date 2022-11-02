@@ -17,8 +17,8 @@ const PasswordManagerNav = () => {
     <Tab.Navigator
       screenOptions={{
         tabBarStyle: {
-      backfaceVisibility:'visible',
-      },
+          backfaceVisibility: 'visible',
+        },
         tabBarIndicatorStyle: {
           backgroundColor: 'orange',
           height: 4.5,

@@ -1,14 +1,9 @@
 import React from 'react';
 import Clipboard from '@react-native-clipboard/clipboard';
 import Toast from 'react-native-simple-toast';
+import {incrementValue} from '../redux/userCountSlice';
 
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  TouchableOpacity,
-} from 'react-native';
+import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 
 export const MainComp = ({
   title = 'Facebook',
@@ -37,6 +32,7 @@ export const MainComp = ({
             </TouchableOpacity>
           </View>
         </View>
+
         <View style={styles.view}>
           <Text style={styles.text3}>{url}</Text>
         </View>
@@ -54,7 +50,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     shadowOpacity: 0.1,
     paddingEnd: 15,
-    marginHorizontal:1,
+    marginHorizontal: 1,
   },
   bodytop: {
     flexDirection: 'row',
@@ -74,11 +70,11 @@ const styles = StyleSheet.create({
     fontSize: 18,
     lineheight: 24,
     marginTop: 8,
-    textAlign:'right',
+    textAlign: 'right',
   },
   view: {
     backgroundColor: '#FAFAFA',
-    width:"104%",
+    width: '104%',
     borderRadius: 15,
     borderRight: 5,
   },
@@ -88,7 +84,7 @@ const styles = StyleSheet.create({
     color: '#0E85FF',
     fontSize: 12,
     marginTop: 8,
-    textAlign:'right',
+    textAlign: 'right',
   },
   text3: {
     fontSize: 15,

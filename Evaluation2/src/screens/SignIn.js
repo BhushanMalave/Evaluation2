@@ -19,6 +19,7 @@ import Icon from 'react-native-vector-icons/Feather';
 import Toast from 'react-native-simple-toast';
 import {changeUserState} from '../redux/userStateSlice';
 import {useDispatch} from 'react-redux';
+import {assignUserId} from '../redux/userIdSlice';
 
 const SignIn = ({navigation}) => {
   const signinValidationSchema = yup.object().shape({
@@ -48,17 +49,16 @@ const SignIn = ({navigation}) => {
             onSubmit={async (values, {resetForm}) => {
               try {
                 const jsonValue = await AsyncStorage.getItem(values.mobileno);
-
+                console.log(jsonValue);
                 if (jsonValue != null) {
                   parseValue = JSON.parse(jsonValue);
-
+                  dispatch(assignUserId(parseValue));
                   if (
                     values.mobileno === parseValue.mobileno &&
                     values.mpin === parseValue.mpin
                   ) {
                     Toast.show(`Congrats!!! Success `, Toast.SHORT);
                     dispatch(changeUserState());
-                    // navigation.navigate('Site Manager');
                     resetForm({initialValues: ''});
                   } else {
                     Toast.show(

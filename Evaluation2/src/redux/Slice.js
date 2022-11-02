@@ -17,6 +17,7 @@ const initialState = [
     sitePassword: '12345678',
     notes: '',
     icon: Image_Icon[0],
+    userId: '1',
   },
   {
     id: '2',
@@ -27,6 +28,7 @@ const initialState = [
     sitePassword: '12345678',
     notes: '',
     icon: Image_Icon[1],
+    userId: '1',
   },
   {
     id: '3',
@@ -37,6 +39,7 @@ const initialState = [
     sitePassword: '12345678',
     notes: '',
     icon: Image_Icon[2],
+    userId: '1',
   },
   {
     id: '4',
@@ -47,26 +50,72 @@ const initialState = [
     sitePassword: '12345678',
     notes: '',
     icon: Image_Icon[3],
+    userId: '1',
+  },
+  {
+    id: '1',
+    url: 'accounts.facebook.com',
+    siteName: 'Facebook',
+    folder: 'Social Media',
+    userName: 'smrock',
+    sitePassword: '12345678',
+    notes: '',
+    icon: Image_Icon[0],
+    userId: '2',
+  },
+  {
+    id: '2',
+    url: 'accounts.youtube.com',
+    siteName: 'Youtube',
+    folder: 'Social Media',
+    userName: 'smrock',
+    sitePassword: '12345678',
+    notes: '',
+    icon: Image_Icon[1],
+    userId: '2',
+  },
+  {
+    id: '3',
+    url: 'accounts.twitter.com',
+    siteName: 'Twitter',
+    folder: 'Social Media',
+    userName: 'smrock',
+    sitePassword: '12345678',
+    notes: '',
+    icon: Image_Icon[2],
+    userId: '2',
+  },
+  {
+    id: '4',
+    url: 'accounts.instagram.com',
+    siteName: 'Instagram',
+    folder: 'Social Media',
+    userName: 'smrock',
+    sitePassword: '12345678',
+    notes: '',
+    icon: Image_Icon[3],
+    userId: '2',
   },
 ];
 
 export const Slice = createSlice({
   name: 'site',
   initialState: {
-    value: initialState,
-    filterValue: initialState,
+    allValues: initialState,
+    value: [],
+    filterValue: [],
   },
   reducers: {
-    // addUser: (state,action) =>{
-    //   // state.value.user.push(action.payload);
-    //   // state.filterValue.user.push(action.payload);
-    //   // console.log(value);
-    //   // console.log(filterValue);
-    //   console.log('aaaa')
+    getUserData: (state, action) => {
+      state.value = state.allValues.filter(item => {
+        return item.userId == action.payload;
+      });
+      state.filterValue = state.value;
+    },
 
-    // },
     addSite: (state, action) => {
       state.value.push(action.payload);
+      state.allValues.push(action.payload);
       state.filterValue.push(action.payload);
     },
     filterSite: (state, action) => {
@@ -76,6 +125,12 @@ export const Slice = createSlice({
     },
     deleteSite: (state, action) => {
       state.value = state.value.filter(item => item.id !== action.payload.id);
+      state.filterValue = state.filterValue.filter(
+        item => item.id !== action.payload.id,
+      );
+      state.allValues = state.allValues.filter(
+        item => item.id !== action.payload.id,
+      );
       state.filterValue = state.filterValue.filter(
         item => item.id !== action.payload.id,
       );
@@ -121,6 +176,7 @@ export const {
   deleteSite,
   filterDropDownSite,
   addUser,
+  getUserData,
 } = Slice.actions;
 
 export default Slice.reducer;

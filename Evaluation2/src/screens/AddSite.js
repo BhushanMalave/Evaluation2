@@ -17,6 +17,7 @@ import Facebook from '../assets/images/Bitmap.png';
 import Toast from 'react-native-simple-toast';
 import Icon from 'react-native-vector-icons/Feather';
 import SelectList from 'react-native-dropdown-select-list';
+import uuid from 'react-native-uuid';
 
 const AddSite = ({navigation}) => {
   const addSiteValidationSchema = yup.object().shape({
@@ -32,6 +33,7 @@ const AddSite = ({navigation}) => {
   const [icon, setIcon] = useState('eye');
   const [secureText, setSecureText] = useState(true);
   const [selected, setSelected] = useState('');
+  const userId = useSelector(state => state.userId.userId);
   const data = [
     {
       key: 'Social Media',
@@ -43,7 +45,7 @@ const AddSite = ({navigation}) => {
     },
   ];
   const initialValues = {
-    id: siteData.length + 1,
+    id: uuid.v4(),
     url: ' ',
     siteName: ' ',
     folder: selected,
@@ -81,6 +83,7 @@ const AddSite = ({navigation}) => {
             sitePassword: values.sitePassword,
             notes: values.notes,
             icon: Facebook,
+            userId: userId,
           };
           dispatch(addSite(obj));
           Toast.show(`Saved Successfully`, Toast.SHORT);
