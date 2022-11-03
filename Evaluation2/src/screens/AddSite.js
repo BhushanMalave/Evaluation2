@@ -8,6 +8,7 @@ import {
   Pressable,
   TextInput,
   ScrollView,
+  KeyboardAvoidingView,
 } from 'react-native';
 import {Formik, Field} from 'formik';
 import * as yup from 'yup';
@@ -18,6 +19,7 @@ import Toast from 'react-native-simple-toast';
 import Icon from 'react-native-vector-icons/Feather';
 import SelectList from 'react-native-dropdown-select-list';
 import uuid from 'react-native-uuid';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 const AddSite = ({navigation}) => {
   const addSiteValidationSchema = yup.object().shape({
@@ -98,7 +100,7 @@ const AddSite = ({navigation}) => {
           isValid,
         }) => (
           <>
-            <ScrollView>
+            <KeyboardAwareScrollView enableOnAndroid>
               <View style={styles.body}>
                 <Text style={styles.text}>URL</Text>
                 <TextInput
@@ -165,7 +167,7 @@ const AddSite = ({navigation}) => {
                   style={styles.textNotes}
                 />
               </View>
-            </ScrollView>
+            </KeyboardAwareScrollView>
             <View style={styles.buttonbody}>
               <Pressable
                 onPress={() => resetForm({initialValues})}
@@ -228,13 +230,13 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 10,
     color: '#3C4858',
-    paddingLeft:25,
+    paddingLeft: 25,
   },
   textInput1: {
     height: 39,
     width: '80%',
     backgroundColor: '#F5F7FB',
-    paddingLeft:25,
+    paddingLeft: 25,
     color: '#3C4858',
   },
   vieweye: {

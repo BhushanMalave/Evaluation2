@@ -18,6 +18,7 @@ import {useRoute} from '@react-navigation/native';
 import {editSite} from '../redux/Slice';
 import Toast from 'react-native-simple-toast';
 import SelectList from 'react-native-dropdown-select-list';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 export const EditSites = ({navigation}) => {
   const editSiteValidationSchema = yup.object().shape({
@@ -87,7 +88,8 @@ export const EditSites = ({navigation}) => {
         }}>
         {({handleChange, handleBlur, handleSubmit, values, isValid}) => (
           <>
-            <ScrollView>
+              <KeyboardAwareScrollView   enableOnAndroid>
+            
               <View style={styles.body}>
                 <Text style={styles.text}>URL</Text>
                 <TextInput
@@ -154,7 +156,7 @@ export const EditSites = ({navigation}) => {
                   style={styles.textNotes}
                 />
               </View>
-            </ScrollView>
+              </KeyboardAwareScrollView>
             <View style={styles.buttonbody}>
               <Pressable
                 onPress={handleSubmit}
