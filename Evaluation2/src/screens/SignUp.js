@@ -48,6 +48,8 @@ export const SignUp = ({navigation}) => {
             validationSchema={signupValidationSchema}
             initialValues={{mobileno: '', mpin: '', conformmpin: ''}}
             onSubmit={async (values, {resetForm}) => {
+              const json = await AsyncStorage.getItem(values.mobileno);
+              if (json == null) {
               const obj = {
                 mobileno: values.mobileno,
                 mpin: values.mpin,
@@ -66,7 +68,16 @@ export const SignUp = ({navigation}) => {
               } catch (err) {
                 console.log(err);
               }
-            }}>
+            }
+            else {
+              Toast.show(
+                `User Allready Registered`,
+                Toast.SHORT,
+              );
+            }
+          }
+            
+            }>
             {({
               handleChange,
               handleBlur,

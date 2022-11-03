@@ -51,6 +51,7 @@ const SignIn = ({navigation}) => {
                 const jsonValue = await AsyncStorage.getItem(values.mobileno);
                 if (jsonValue != null) {
                   parseValue = JSON.parse(jsonValue);
+                  console.log(parseValue)
                   dispatch(assignUserId(parseValue));
                   if (
                     values.mobileno === parseValue.mobileno &&
